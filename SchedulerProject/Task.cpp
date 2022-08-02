@@ -1,19 +1,5 @@
 #include "Task.h"
 
-bool operator<(const Task& task1, const Task& task2)
-{
-    if (task1.getPriority() == task2.getPriority())
-        return task1.getArriavlTime() < task2.getArriavlTime();
-    return task1.getPriority() < task2.getPriority();
-}
-
-bool operator>(const Task& task1, const Task& task2)
-{
-    if (task1.getPriority() == task2.getPriority())
-        return task1.getArriavlTime() > task2.getArriavlTime();
-    return task1.getPriority() > task2.getPriority();
-}
-
 Task::Task(int taskId, int type, int (*func)(void*),
     int arriavlTime, int priority, void* args)
 {
@@ -25,6 +11,35 @@ Task::Task(int taskId, int type, int (*func)(void*),
     this->args = args;
 }
 
+bool operator<(const Task& task1, const Task& task2)
+{
+    if (task1.priority == task2.priority)
+        return task1.priority < task2.priority;
+    return task1.priority < task2.priority;
+}
+
+bool operator>(const Task& task1, const Task& task2)
+{
+    if (task1.priority == task2.priority)
+        return task1.priority > task2.priority;
+    return task1.priority > task2.priority;
+}
+
+bool operator>(const Task& task, const int priority)
+{
+    return task.priority > priority;
+}
+
+bool operator<(const Task& task, const int priority)
+{
+    return task.priority < priority;
+}
+
+
+void Task::operator=(int priority)
+{
+    this->setPriority(priority);
+}
 
 bool Task::Start()
 {
