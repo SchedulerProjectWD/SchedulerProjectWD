@@ -16,6 +16,7 @@ public:
 	friend bool operator<(const Task& task1, const Task& task2);
 	friend bool operator>(const Task& task1, const Task& task2);
 	bool Start();
+
 private:
 	void* args;
 	int taskId;

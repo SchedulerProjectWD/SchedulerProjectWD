@@ -1,3 +1,4 @@
+
 #include "Task.h"
 
 bool operator<(const Task& task1, const Task& task2)
