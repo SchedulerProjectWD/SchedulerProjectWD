@@ -19,10 +19,11 @@ private:
 public:
 	MaxHeap(int maxSize);
 	~MaxHeap();
-	bool insert(T* item);
-	bool isEmpty();
-	T* extractMax();
-	friend void detactStarvation<T>(MaxHeap<T>* maxHeap, int limit);
+	bool Insert(T* item);
+	bool IsEmpty();
+	T* ExtractMax();
+	void ChangePriority(T* item, int priority);
+	T* operator[](int index);
 };
 
 template<class T>
@@ -90,33 +91,57 @@ inline MaxHeap<T>::~MaxHeap()
 }
 
 template<class T>
-inline bool MaxHeap<T>::insert(T* item)
+inline bool MaxHeap<T>::Insert(T* item)
 {
 	if (size == maxSize)
 		return false;
+	heap[size] = item;
+	siftUp(size);
 	size++;
-	heap[size - 1] = item;
-	siftUp(size - 1);
 	return true;
 }
 
 template<class T>
-inline bool MaxHeap<T>::isEmpty()
+inline bool MaxHeap<T>::IsEmpty()
 {
 	return size == 0;
 }
 
 template<class T>
-inline T* MaxHeap<T>::extractMax()
+inline T* MaxHeap<T>::ExtractMax()
 {
 	T* maxItem = heap[0];
-	heap[0] = heap[size - 1];
 	size--;
+	heap[0] = heap[size];
 	siftDown(0);
 	return maxItem;
 }
 
-template <class T>
-inline void detactStarvation(MaxHeap<T>* maxHeap, int limit)
+template<class T>
+inline void MaxHeap<T>::ChangePriority(T* item, int priority)
 {
+	for (int i = 0; i < size; i++)
+	{
+		if (heap[i] == item)
+		{
+			if (*item > priority)
+			{
+				*item = priority;
+				siftDown(i);
+			}
+			else {
+				*item = priority;
+				sifttUp(i);
+			}
+		}
+	}
 }
+
+template <class T>
+T* MaxHeap<T>::operator[](int index)
+{
+	if (index < 0 || index >= size)
+		throw exception("the index is out of range")
+		return heap[index];
+}
+
