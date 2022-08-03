@@ -13,6 +13,7 @@ public:
 	void enqueue(T* in) { list->addToBack(in); }
 	T* dequeue() { return list->remove(); }
 	Node<T>* getHead() { return list->getHead(); }
+	LinkedList<T>* getInnerList() { return list; }
 	int getSize() { return list->getLength(); }
 };
 #endif // !_QUEUE_H_
