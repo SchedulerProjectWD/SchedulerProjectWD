@@ -13,6 +13,7 @@ public:
 	bool addToBack(T* data);
 	T& remove();
 	Node<T>* getHead();
+	int getLength();
 	LinkedList();
 	~LinkedList();
 };
@@ -40,6 +41,19 @@ bool LinkedList<T>::addToBack(T* data) {
 	}
 	return true;
 }
+
+template<class T>
+int LinkedList<T>::getLength() {
+	Node<T>* runer = first;
+	int length = 0;
+	if (first == nullptr) return length;
+	length++;
+	while (runer->next) {
+		length++;
+		runer = runer->next;
+	}
+	return length;
+}
 template<class T>
 T& LinkedList<T>::remove() {
 	if (first->data) {
@@ -64,5 +78,6 @@ LinkedList<T>::~LinkedList() {
 	}
 	delete prev;
 }
+
 #endif // !_LINKEDLIST_H_
 
