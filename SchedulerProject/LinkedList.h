@@ -14,6 +14,7 @@ public:
 	T& remove();
 	Node<T>* getHead();
 	int getLength();
+	void deleteNode(Node<T>* node);
 	LinkedList();
 	~LinkedList();
 };
@@ -47,27 +48,56 @@ int LinkedList<T>::getLength() {
 	Node<T>* runer = first;
 	int length = 0;
 	if (first == nullptr) return length;
-	length++;
 	while (runer->next) {
 		length++;
 		runer = runer->next;
 	}
-	return length;
+	//increse length to include last node
+	return ++length;
 }
 template<class T>
 T& LinkedList<T>::remove() {
 	if (first->data) {
-		T _data = first->data;
-		if (first->next)
+		T data = first->data;
+		if (first->next) {
+			Node<T>* toDel = first;
 			first = first->next;
-		return _data;
+			delete toDel;
+		}
+		return data;
 	}
 	return nullptr;
 }
+
+template<class T>
+void LinkedList<T>::deleteNode(Node<T>* node) {
+	//edge case- node is the head
+	if (node == first)
+	{
+		Node<T>* toDel = first;
+		first = node->next;
+		delete toDel;
+		return;
+	}
+	Node<T>* temp = first;
+	while (temp && temp->next) {
+		if (temp->next == node)
+		{
+			if (temp->next == last)
+				last = temp;
+			Node<T>* toDel = temp->next;
+			temp->next = temp->next->next;
+			delete toDel;
+		}
+		temp = temp->next;
+	}
+}
+
 template<class T>
 Node<T>* LinkedList<T>::getHead() {
 	return first;
 }
+
 template<class T>
 LinkedList<T>::~LinkedList() {
 	Node<T>* prev = first;
