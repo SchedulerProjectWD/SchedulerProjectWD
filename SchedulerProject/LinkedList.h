@@ -10,7 +10,7 @@ class LinkedList
 	Node<T>* first;
 	Node<T>* last;
 public:
-	bool addToBack(const T data);
+	bool addToBack(T* data);
 	T& remove();
 	Node<T>* getHead();
 	LinkedList();
@@ -22,7 +22,7 @@ LinkedList<T>::LinkedList() {
 	 first = last = nullptr;
 }
 template<class T>
-bool LinkedList<T>::addToBack(const T data) {
+bool LinkedList<T>::addToBack(T* data) {
 	if (!first) {
 		first = new Node<T>(data);
 		last = first;

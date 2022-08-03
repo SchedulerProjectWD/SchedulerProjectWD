@@ -10,7 +10,7 @@ private:
 public:
 	Queue() { list = new LinkedList<T>(); }
 	bool is_empty() { return list->getHead() == nullptr; }
-	void enqueue(T in) { list->addToBack(in); }
+	void enqueue(T* in) { list->addToBack(in); }
 	T* dequeue() { return list->remove(); }
 	Node<T>* getHead() { return list->getHead(); }
 };

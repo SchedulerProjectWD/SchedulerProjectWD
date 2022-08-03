@@ -7,14 +7,14 @@ class Node
 {
 public:
 	Node* next;
-	T data;
-	Node(T data);
+	T* data;
+	Node(T* data);
 };
 
 template<class T>
-Node<T>::Node(T data) : data(data) {
+Node<T>::Node(T* data) : data(data) {
 	next = nullptr;
-}
+};
 
 #endif // !_NODE_H
 
