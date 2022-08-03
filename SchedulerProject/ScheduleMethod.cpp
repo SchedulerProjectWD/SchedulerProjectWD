@@ -10,7 +10,7 @@ inline int ScheduleMethod::getLimitTasks() const
 	return limitTasksToExec;
 }
 
-inline int ScheduleMethod::getDoneTasks()
+inline int ScheduleMethod::getDoneTasks() const
 {
 	return doneTasks;
 }

@@ -14,7 +14,7 @@ public:
 	virtual bool Insert(Task* task) = 0;
 	virtual bool IsEmpty() = 0;
 	int getLimitTasks() const;
-	int getDoneTasks();
+	int getDoneTasks() const;
 	void IncreaseDoneTasks();
 	void ResetDoneTasks();
 	virtual LinkedList<Task>* detectSystem(int limit) = 0;
