@@ -17,5 +17,5 @@ public:
 	int getDoneTasks();
 	void IncreaseDoneTasks();
 	void ResetDoneTasks();
-	virtual LinkedList<Task> detectSystem(int limit) = 0;
+	virtual LinkedList<Task>* detectSystem(int limit) = 0;
 };
