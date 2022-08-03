@@ -14,6 +14,7 @@ public:
 	auto getFunc()		 const { return this->func; }
 	int getArriavlTime() const { return this->arriavlTime; }
 	int getPriority()	 const { return this->priority; }
+	int getTimeOut()		   { return timeOut; }
 	void setPriority(const int newPriority) { this->priority = newPriority; };
 	bool Start();
 	friend bool operator<(const Task& task1, const Task& task2);
@@ -28,6 +29,7 @@ private:
 	int (*func)(void*);
 	int arriavlTime;
 	int priority;
+	int timeOut;
 };
 
 #endif // !_TASK_H_
