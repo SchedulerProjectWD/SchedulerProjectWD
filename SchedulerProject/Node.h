@@ -8,6 +8,7 @@ class Node
 public:
 	Node* next;
 	T* data;
+	Node() = default;
 	Node(T* data);
 };
 
