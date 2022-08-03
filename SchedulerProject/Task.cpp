@@ -14,14 +14,14 @@ Task::Task(int taskId, int type, int (*func)(void*),
 bool operator<(const Task& task1, const Task& task2)
 {
     if (task1.priority == task2.priority)
-        return task1.priority < task2.priority;
+        return task1.arriavlTime < task2.arriavlTime;
     return task1.priority < task2.priority;
 }
 
 bool operator>(const Task& task1, const Task& task2)
 {
     if (task1.priority == task2.priority)
-        return task1.priority > task2.priority;
+        return task1.arriavlTime > task2.arriavlTime;
     return task1.priority > task2.priority;
 }
 
