@@ -143,6 +143,10 @@
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Queue.cpp" />
     <ClCompile Include="SchedulerProject.cpp" />
+    <ClCompile Include="Task.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Task.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LinkedList.h" />
