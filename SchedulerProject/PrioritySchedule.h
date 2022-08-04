@@ -18,7 +18,7 @@ public:
 	bool Insert(Task* task);
 	int GetNumWaitingTasks();
 	bool InsertFromAnotherQueue(Task* task);
-	void DetactSystem(int currentTime, int limit);
+	void DetactSystem( int limit);
 }; 
 
 
