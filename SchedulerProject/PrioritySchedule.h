@@ -19,7 +19,7 @@ public:
 	int GetNumWaitingTasks();
 	bool InsertFromAnotherQueue(Task* task);
 	void DetactSystem(int currentTime, int limit);
-};
+}; 
 
 
 

@@ -47,7 +47,7 @@ inline void PrioritySchedule::DetactSystem(int currentTime, int limit) //the lim
 	for (size_t i = 0; i < countTasks; i++)
 	{
 		int waitingTime = currentTime - queue[i]->getArrivalTime();
-		if (waitingTime >= closeToStarvation)
+		if (waitingTime >= closeToStarvation) 
 			queue->ChangePriority(queue[i], MaxPriority);
 	}
 }
