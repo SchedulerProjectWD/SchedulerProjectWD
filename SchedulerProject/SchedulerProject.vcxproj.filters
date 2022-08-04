@@ -18,6 +18,7 @@
     <ClCompile Include="SchedulerProject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MaxHeap.cpp">
     <ClCompile Include="Node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -30,6 +31,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MaxHeap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
