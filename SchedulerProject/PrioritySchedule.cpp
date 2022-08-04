@@ -5,7 +5,7 @@
 #include "Timer.h"
 
 //c-tor & d-tor
-PrioritySchedule::PrioritySchedule(int limitTasksToExec, int limitSize, int closeToStarvation) : base(limitTasksToExec, closeToStarvation) {
+PrioritySchedule::PrioritySchedule(int limitTasksToExec, int limitSize, int closeToStarvation) : ScheduleMethod(limitTasksToExec, closeToStarvation) {
 	queue = new MaxHeap<Task>(limitSize);
 }
 PrioritySchedule::~PrioritySchedule() {
