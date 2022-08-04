@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Task.h"
 #include "ScheduleMethod.h"
-#include "PriorityScheduler.h"
+#include "PrioritySchedule.h"
 
 //c-tor & d-tor
 PrioritySchedule::PrioritySchedule(int limitTasksToExec, int limitSize, int closeToStarvation) : base(limitTasksToExec, closeToStarvation) {
@@ -46,9 +46,9 @@ inline void PrioritySchedule::DetactSystem(int currentTime, int limit) //the lim
 
 	for (size_t i = 0; i < countTasks; i++)
 	{
-		int waitingTime = queue[i]->getArrivalTime();
+		int waitingTime = currentTime - queue[i]->getArrivalTime();
 		if (waitingTime >= closeToStarvation)
-			ChangePriority(queue[i], MaxPriority);
+			queue->ChangePriority(queue[i], MaxPriority);
 	}
 }
 

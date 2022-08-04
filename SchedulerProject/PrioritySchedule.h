@@ -10,7 +10,6 @@ private:
 
 	MaxHeap<Task>* queue;
 	const int MaxPriority = 200;
-
 public:
 	bool IsEmpty();
 	~PrioritySchedule();
