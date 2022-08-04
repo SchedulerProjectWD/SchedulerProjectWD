@@ -19,6 +19,14 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MaxHeap.cpp">
+    <ClCompile Include="Node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LinkedList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Queue.cpp">
+    <ClCompile Include="Task.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

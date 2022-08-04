@@ -140,7 +140,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="MaxHeap.cpp" />
+    <ClCompile Include="LinkedList.cpp" />
+    <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Queue.cpp" />
     <ClCompile Include="SchedulerProject.cpp" />
+    <ClCompile Include="Task.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Task.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="Queue.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MaxHeap.h" />
