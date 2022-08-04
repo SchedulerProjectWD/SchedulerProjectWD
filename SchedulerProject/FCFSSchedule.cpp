@@ -4,7 +4,7 @@
 #include <climits>
 
 FCFSSchedule::FCFSSchedule(int limitTasks, int closeToStarvation)
-	:base(limitTasks, closeToStarvation)
+	:ScheduleMethod(limitTasks, closeToStarvation)
 {
 	queue = new Queue<Task>();
 }
