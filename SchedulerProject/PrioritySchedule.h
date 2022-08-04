@@ -1,5 +1,6 @@
 #include "Task.h"
 #include "ScheduleMethod.h"
+#include "LinkedList.h"
 #include <iostream>
 
 using namespace std;
@@ -18,7 +19,7 @@ public:
 	bool Insert(Task* task);
 	int GetNumWaitingTasks();
 	bool InsertFromAnotherQueue(Task* task);
-	void DetactSystem( int limit);
+	LinkedList<Task>* DetectSystem( int limit);
 }; 
 
 

@@ -13,7 +13,7 @@ public:
 	bool IsEmpty() override;
 	bool Insert(Task* task) override;
 	Task* ScheduleTask() override;
-	LinkedList<Task>* detectSystem(int limit = 0) override;
+	LinkedList<Task>* DetectSystem(int limit = 0) override;
 	int GetNumWaitingTasks() override;
 };
 

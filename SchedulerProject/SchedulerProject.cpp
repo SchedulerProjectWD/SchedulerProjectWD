@@ -4,6 +4,7 @@
 #include "Task.h" 
 #include "ScheduleMethod.h"
 #include "FCFSSchedule.h"
+#include "PrioritySchedule.h"
 using namespace std;
 
 int main()
@@ -18,4 +19,8 @@ int main()
 	FCFSSchedule f(10, 7);
 	f.Insert(&t);
 	cout << f.ScheduleTask()->getArriavlTime() << endl;
+	PrioritySchedule p(10, 15, 6);
+	p.Insert(&t);
+	cout << p.ScheduleTask()->getArriavlTime() << endl;
+
 }
