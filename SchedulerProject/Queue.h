@@ -11,7 +11,7 @@ public:
 	Queue() { list = new LinkedList<T>(); }
 	bool is_empty() { return list->getHead() == nullptr; }
 	void enqueue(T* in) { list->addToBack(in); }
-	T* dequeue() { return list->remove(); }
+	T* dequeue() { return list->popFront(); }
 	Node<T>* getHead() { return list->getHead(); }
 	LinkedList<T>* getInnerList() { return list; }
 	int getSize() { return list->getLength(); }

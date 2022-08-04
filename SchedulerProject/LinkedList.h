@@ -11,7 +11,7 @@ class LinkedList
 	Node<T>* last;
 public:
 	bool addToBack(T* data);
-	T& remove();
+	T* popFront();
 	Node<T>* getHead();
 	int getLength();
 	void deleteNode(Node<T>* node);
@@ -45,20 +45,19 @@ bool LinkedList<T>::addToBack(T* data) {
 
 template<class T>
 int LinkedList<T>::getLength() {
+	if (first == nullptr) return 0;
 	Node<T>* runer = first;
 	int length = 0;
-	if (first == nullptr) return length;
-	while (runer->next) {
+	while (runer) {
 		length++;
 		runer = runer->next;
 	}
-	//increse length to include last node
-	return ++length;
+	return length;
 }
 template<class T>
-T& LinkedList<T>::remove() {
+T* LinkedList<T>::popFront() {
 	if (first->data) {
-		T data = first->data;
+		T* data = first->data;
 		if (first->next) {
 			Node<T>* toDel = first;
 			first = first->next;
