@@ -1,6 +1,6 @@
 #include "ScheduleMethod.h"
 
-inline ScheduleMethod::ScheduleMethod(int limitTasks, int closeToStarvation) :
+ScheduleMethod::ScheduleMethod(int limitTasks, int closeToStarvation) :
 	limitTasksToExec(limitTasks)
 	, closeToStarvation(closeToStarvation), doneTasks(0)
 {

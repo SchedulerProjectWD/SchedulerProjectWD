@@ -1,7 +1,8 @@
 #pragma once
 #include "ScheduleMethod.h"
+#include "Queue.h"
 #include "Task.h"
-class FCFSSchedule :ScheduleMethod
+class FCFSSchedule :public ScheduleMethod
 {
 private:
 	Queue<Task>* queue;
