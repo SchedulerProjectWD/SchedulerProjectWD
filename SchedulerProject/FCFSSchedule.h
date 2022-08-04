@@ -12,7 +12,7 @@ public:
 	bool IsEmpty() override;
 	bool Insert(Task* task) override;
 	Task* ScheduleTask() override;
-	LinkedList<Task>* DetectTimeout(int limit, int currentTime) override;
+	LinkedList<Task>* detectSystem(int limit, int currentTime) override;
 	int GetNumWaitingTasks() override;
 };
 
