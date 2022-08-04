@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ScheduleMethod.cpp" />
     <ClCompile Include="MaxHeap.cpp" />
     <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="Node.cpp" />
@@ -156,6 +157,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MaxHeap.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ScheduleMethod.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
