@@ -19,11 +19,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ScheduleMethod.cpp">
+    <ClCompile Include="MaxHeap.cpp">
+    <ClCompile Include="Node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LinkedList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Queue.cpp">
+    <ClCompile Include="Task.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ScheduleMethod.h">
+    <ClInclude Include="MaxHeap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
