@@ -132,7 +132,7 @@ inline void MaxHeap<T>::ChangePriority(T* item, int priority)
 			}
 			else {
 				*item = priority;
-				sifttUp(i);
+				siftUp(i);
 			}
 		}
 	}
@@ -142,8 +142,8 @@ template <class T>
 T* MaxHeap<T>::operator[](int index)
 {
 	if (index < 0 || index >= size)
-		throw exception("the index is out of range")
-		return heap[index];
+		throw exception("the index is out of range");
+	return heap[index];
 }
 
 template<class T>
