@@ -1,7 +1,9 @@
 ﻿#include <iostream>
-
+#include "Node.h"
+#include "LinkedList.h"
+#include "Queue.h"
+using namespace std;
 int main()
 {
-    std::cout << "Hello World! its Blumi Racheli and Miri's projectos\n";
-    
+
 }
