@@ -10,15 +10,14 @@ protected:
 	int closeToStarvation;
 
 public:
-	ScheduleMethod(int limitTasks, closeToStarvation);
+	ScheduleMethod(int limitTasks, int closeToStarvation);
 	virtual Task* ScheduleTask() = 0;
 	virtual bool Insert(Task* task) = 0;
 	virtual bool IsEmpty() = 0;
-	ScheduleMethod(int limitTasks, int closeToStarvation);
 	int getLimitTasks() const;
 	int getDoneTasks() const;
 	int getCloseToStarvation() const;
 	void IncreaseDoneTasks();
 	void ResetDoneTasks();
-	virtual LinkedList<Task>* detectSystem(int limit) = 0;
+	virtual LinkedList<Task>* detectSystem(int limit = 0) = 0;
 };
