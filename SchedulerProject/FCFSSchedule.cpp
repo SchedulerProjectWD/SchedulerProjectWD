@@ -62,10 +62,10 @@ Node<Task>* FCFSSchedule::smallestRemainingTimeTillTimeout(Node<Task>* head, int
 
 // Function that returns a list of size limit containing close-to-timeout
 // tasks that where removed from the Q.
-LinkedList<Task>* FCFSSchedule::detectSystem(int limit, int currentTime)
+LinkedList<Task>* FCFSSchedule::detectSystem(int limit = 0)
 {
 	if (this->IsEmpty()) return nullptr;
-
+	int currentTime = Timer::currentTime();
 	LinkedList<Task>* tasksCloseToTimeout = new LinkedList<Task>();
 	LinkedList<Task>* Q = queue->getInnerList();
 	for (int i = 0; i < limit; i++)
