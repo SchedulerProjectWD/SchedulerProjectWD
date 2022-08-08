@@ -157,6 +157,7 @@
     <ClInclude Include="MultiLevelQueue.h" />
     <ClInclude Include="PrioritySchedule.h" />
     <ClInclude Include="Task.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LinkedList.h" />

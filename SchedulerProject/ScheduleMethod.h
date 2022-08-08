@@ -25,3 +25,5 @@ public:
 	virtual int GetNumWaitingTasks() = 0;
 	virtual LinkedList<Task>* DetectSystem(int limit = 0) = 0;
 };
+
+ 

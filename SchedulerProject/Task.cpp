@@ -1,7 +1,7 @@
 #include "Task.h"
 #include "ScheduleMethod.h"
 
-Task::Task(int taskId, int type, int (*func)(void*), int arriavlTime, int priority, void* args) {
+Task::Task(int taskId, eType type, int (*func)(void*), int arriavlTime, int priority, void* args) {
     this->taskId = taskId;
     this->type = (eType)type;
     this->func = *func;
@@ -45,3 +45,5 @@ bool Task::Start()
     func(args);
     return true;
 }
+
+ 

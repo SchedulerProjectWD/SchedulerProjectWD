@@ -24,6 +24,7 @@
     <ClInclude Include="PrioritySchedule.h" />
     <ClInclude Include="MultiLevelQueue.h" />
     <ClInclude Include="Enum.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SchedulerProject.vcxproj.user" />
