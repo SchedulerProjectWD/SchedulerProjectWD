@@ -20,6 +20,7 @@
     <ClInclude Include="MaxHeap.h" />
     <ClInclude Include="ScheduleMethod.h" />
     <ClInclude Include="PrioritySchedule.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SchedulerProject.vcxproj.user" />

@@ -5,8 +5,9 @@
 #include "ScheduleMethod.h"
 #include "FCFSSchedule.h"
 #include "PrioritySchedule.h"
+#include "Timer.h"
 using namespace std;
-
+int Timer::time = 0;
 int main()
 {
 	Task t(1, 1, nullptr, 1, 100);
