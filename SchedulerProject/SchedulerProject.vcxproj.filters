@@ -10,6 +10,8 @@
     <ClCompile Include="SchedulerProject.cpp" />
     <ClCompile Include="Task.cpp" />
     <ClCompile Include="PrioritySchedule.cpp" />
+    <ClCompile Include="MultiLevelQueue.cpp" />
+    <ClCompile Include="Enum.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FCFSSchedule.h" />
@@ -20,6 +22,8 @@
     <ClInclude Include="MaxHeap.h" />
     <ClInclude Include="ScheduleMethod.h" />
     <ClInclude Include="PrioritySchedule.h" />
+    <ClInclude Include="MultiLevelQueue.h" />
+    <ClInclude Include="Enum.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SchedulerProject.vcxproj.user" />

@@ -139,7 +139,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Enum.cpp" />
     <ClCompile Include="FCFSSchedule.cpp" />
+    <ClCompile Include="MultiLevelQueue.cpp" />
     <ClCompile Include="PrioritySchedule.cpp" />
     <ClCompile Include="ScheduleMethod.cpp" />
     <ClCompile Include="MaxHeap.cpp" />
@@ -150,7 +152,9 @@
     <ClCompile Include="Task.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enum.h" />
     <ClInclude Include="FCFSSchedule.h" />
+    <ClInclude Include="MultiLevelQueue.h" />
     <ClInclude Include="PrioritySchedule.h" />
     <ClInclude Include="Task.h" />
   </ItemGroup>
