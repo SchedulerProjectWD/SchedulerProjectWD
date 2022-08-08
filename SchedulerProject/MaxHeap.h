@@ -48,7 +48,7 @@ inline int MaxHeap<T>::rightChild(int i)
 template<class T>
 inline void MaxHeap<T>::siftUp(int i)
 {
-	while (i > 0 and *(heap[parent(i)]) < *(heap[i]))
+	while (i > 0 && *(heap[parent(i)]) < *(heap[i]))
 	{
 		T* temp = heap[parent(i)];
 		heap[parent(i)] = heap[i];
