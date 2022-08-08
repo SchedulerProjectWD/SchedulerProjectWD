@@ -1,3 +1,4 @@
+#include "ScheduleMethod.h"
 #pragma once
 #ifndef _TASK_H_
 #define _TASK_H_
@@ -6,15 +7,15 @@
 class Task
 {
 public:
-	Task(int taskId, int type, int (*func)(void*),
-		 int arriavlTime, int priority = 0, void* args = nullptr);
-	enum eType { real_time, low, high };
-	eType getType()		 const { return this->type; }
+	Task(int taskId, eType type, int (*func)(void*),
+		int arriavlTime, int priority = 0, void* args = nullptr);
+
+	eType getType()		 const { return eType(this->type); }
 	int getTaskId()		 const { return this->taskId; }
 	auto getFunc()		 const { return this->func; }
 	int getArriavlTime() const { return this->arriavlTime; }
 	int getPriority()	 const { return this->priority; }
-	int getTimeOut()		   { return timeOut; }
+	int getTimeOut() { return timeOut; }
 	void setPriority(const int newPriority) { this->priority = newPriority; };
 	bool Start();
 	friend bool operator<(const Task& task1, const Task& task2);

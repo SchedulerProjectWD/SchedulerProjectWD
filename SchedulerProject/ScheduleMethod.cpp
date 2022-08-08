@@ -5,7 +5,10 @@ ScheduleMethod::ScheduleMethod(int limitTasks, int closeToStarvation) :
 	, closeToStarvation(closeToStarvation), doneTasks(0)
 {
 }
-
+inline eType ScheduleMethod::getType() const
+{
+	return (eType)type;
+}
 inline int ScheduleMethod::getLimitTasks() const
 {
 	return limitTasksToExec;
