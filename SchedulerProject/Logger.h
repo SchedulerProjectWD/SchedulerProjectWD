@@ -6,9 +6,8 @@ using namespace std;
 class Logger
 {
 	fstream fileStream;
-	int positionWrite;
 	int positionRead;
-	//const char* path;
+
 public:
 	Logger(const char* path);
 	~Logger();
