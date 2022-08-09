@@ -13,6 +13,7 @@ public:
 	int getMaxCapacity();
 	bool IsEmpty();
 	bool IsFull();
+	void decreaseCurrentSize();
 	bool AddNewTask(Task* newTask);
 	ScheduleMethod* operator[](int index);
 	ScheduleMethod* operator[](eType type);

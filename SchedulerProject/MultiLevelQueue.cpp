@@ -1,5 +1,5 @@
 #include "MultiLevelQueue.h"
-#include "FCFSScedule.h"
+#include "FCFSSchedule.h"
 #include <exception>
 
 MultiLevelQueue::MultiLevelQueue(int maxCapacity) :maxCapacity(maxCapacity) {
@@ -19,13 +19,17 @@ bool MultiLevelQueue::IsFull() {
 	return currentSize == maxCapacity;
 }
 
+int MultiLevelQueue::getMaxCapacity() {
+	return maxCapacity;
+}
+
 int MultiLevelQueue::getCurrentSize()
 {
 	return currentSize;
 }
 
-int MultiLevelQueue::getMaxCapacity() {
-	return maxCapacity;
+void MultiLevelQueue::decreaseCurrentSize() {
+	currentSize--;
 }
 
 bool MultiLevelQueue::AddNewTask(Task* newTask) {
