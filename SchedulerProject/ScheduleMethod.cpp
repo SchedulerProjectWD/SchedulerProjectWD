@@ -1,7 +1,7 @@
 #include "ScheduleMethod.h" 
 
-ScheduleMethod::ScheduleMethod(int limitTasks, int closeToStarvation) :
-	limitTasksToExec(limitTasks)
+ScheduleMethod::ScheduleMethod(int limitTasksToExec, int closeToStarvation) :
+	limitTasksToExec(limitTasksToExec)
 	, closeToStarvation(closeToStarvation), doneTasks(0)
 {
 }
@@ -9,7 +9,7 @@ inline eType ScheduleMethod::getType() const
 {
 	return (eType)type;
 }
-inline int ScheduleMethod::getLimitTasks() const
+inline int ScheduleMethod::getLimitTasksToExec() const
 {
 	return limitTasksToExec;
 }

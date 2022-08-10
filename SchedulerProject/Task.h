@@ -1,8 +1,8 @@
-#include "ScheduleMethod.h"
 #pragma once
 #ifndef _TASK_H_
 #define _TASK_H_
 
+enum class eType { real_time, low, high };
 
 class Task
 {

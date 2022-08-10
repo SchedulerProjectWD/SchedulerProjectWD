@@ -8,7 +8,7 @@ private:
 	Queue<Task>* queue;
 	Node<Task>* smallestRemainingTimeTillTimeout(Node<Task>* head,int curentTime);
 public:
-	FCFSSchedule(int limitTasks, int closeToStarvation);
+	FCFSSchedule(int limitTasksToExec, int closeToStarvation);
 	~FCFSSchedule();
 	bool IsEmpty() override;
 	bool Insert(Task* task) override;

@@ -2,8 +2,6 @@
 #include "Task.h"
 #include "LinkedList.h"
 
-static enum class eType { real_time, low, high };
-
 class ScheduleMethod
 {
 protected:
@@ -12,9 +10,9 @@ protected:
 	int closeToStarvation;
 	eType type;
 public:	
-	ScheduleMethod(int limitTasks, int closeToStarvation);
+	ScheduleMethod(int limitTasksToExec, int closeToStarvation);
 	eType getType() const;
-	int getLimitTasks() const;
+	int getLimitTasksToExec() const;
 	int getDoneTasks() const;
 	int getCloseToStarvation() const;
 	void IncreaseDoneTasks();

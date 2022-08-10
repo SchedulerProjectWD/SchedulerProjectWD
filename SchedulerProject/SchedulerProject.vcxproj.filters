@@ -3,13 +3,12 @@
   <ItemGroup>
     <ClCompile Include="FCFSSchedule.cpp" />
     <ClCompile Include="ScheduleMethod.cpp" />
-    <ClCompile Include="SchedulerProject.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Task.cpp" />
     <ClCompile Include="PrioritySchedule.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="MultiLevelQueue.cpp" />
-    <ClCompile Include="Enum.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FCFSSchedule.h" />
@@ -24,7 +23,6 @@
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="MultiLevelQueue.h" />
-    <ClInclude Include="Enum.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
