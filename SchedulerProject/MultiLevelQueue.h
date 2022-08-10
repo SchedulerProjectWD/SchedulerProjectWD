@@ -7,7 +7,11 @@ private:
 	int currentSize;
 	const int maxCapacity;
 	const int queuesCount = 3;
-	MultiLevelQueue(int maxCapacity);
+	MultiLevelQueue(int maxCapacity,
+		//parameters for the priority scheduler :
+		int PriorityLimitTasksToExec, int PriorityCloseToStarvation,
+		//parameters for the FCFS scheduler :
+		int FCFSlimitTasksToExec, int FCFScloseToStarvation);
 public:
 	int getCurrentSize();
 	int getMaxCapacity();
@@ -17,6 +21,7 @@ public:
 	bool AddNewTask(Task* newTask);
 	ScheduleMethod* operator[](int index);
 	ScheduleMethod* operator[](eType type);
-	static MultiLevelQueue& getMLQ(int maxCapacity);
+	static MultiLevelQueue& getMLQ(int maxCapacity
+		   ,int PriorityLimitTasksToExec, int PriorityCloseToStarvation
+		   ,int FCFSlimitTasksToExec, int FCFScloseToStarvation);
 };
-

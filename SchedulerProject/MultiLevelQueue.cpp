@@ -1,14 +1,18 @@
 #include "MultiLevelQueue.h"
 #include "FCFSSchedule.h"
+#include "PrioritySchedule.h"
+#include "Task.h"
 #include <exception>
 
-MultiLevelQueue::MultiLevelQueue(int maxCapacity) :maxCapacity(maxCapacity) {
+MultiLevelQueue::MultiLevelQueue(int maxCapacity ,
+							int PriorityLimitTasksToExec, int PriorityCloseToStarvation,
+							int FCFSlimitTasksToExec, int FCFScloseToStarvation) 
+	:maxCapacity(maxCapacity),currentSize(0)
+{
 	queues = new ScheduleMethod * [queuesCount];
-	currentSize = 0;
-	for (int i = 0; i < queuesCount; i++)
-	{
-		queues[i] = nullptr;
-	}
+	queues[0] = new PrioritySchedule(PriorityLimitTasksToExec,maxCapacity,PriorityCloseToStarvation);
+	queues[1] = new FCFSSchedule(FCFSlimitTasksToExec,FCFScloseToStarvation ,eType::high);
+	queues[2] = new FCFSSchedule(FCFSlimitTasksToExec, FCFScloseToStarvation, eType::low);
 }
 
 bool MultiLevelQueue::IsEmpty() {
@@ -68,7 +72,10 @@ ScheduleMethod* MultiLevelQueue::operator[](eType type) {
 	return nullptr;
 }
 
-MultiLevelQueue& MultiLevelQueue::getMLQ(int maxCapacity) {
-	static MultiLevelQueue MLQ(maxCapacity);
+MultiLevelQueue& MultiLevelQueue::getMLQ(int maxCapacity = 100
+	                   , int PriorityLimitTasksToExec = 10, int PriorityCloseToStarvation = 10
+	                   , int FCFSlimitTasksToExec =7, int FCFScloseToStarvation=15)
+{
+	static MultiLevelQueue MLQ(maxCapacity ,PriorityLimitTasksToExec,PriorityCloseToStarvation,FCFSlimitTasksToExec,FCFScloseToStarvation);
 	return MLQ;
 }
