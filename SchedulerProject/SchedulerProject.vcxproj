@@ -141,21 +141,18 @@
   <ItemGroup>
     <ClCompile Include="FCFSSchedule.cpp" />
     <ClCompile Include="Logger.cpp" />
-    <ClCompile Include="MultiLevelQueue.cpp" />
     <ClCompile Include="PrioritySchedule.cpp" />
     <ClCompile Include="ScheduleMethod.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Task.cpp" />
-    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\..\..\source\repos\SchedulerProjectWD\SchedulerProject\Timer.h" />
     <ClInclude Include="FCFSSchedule.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="LogRecord.h" />
-    <ClInclude Include="MultiLevelQueue.h" />
     <ClInclude Include="PrioritySchedule.h" />
     <ClInclude Include="Task.h" />
-    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LinkedList.h" />
