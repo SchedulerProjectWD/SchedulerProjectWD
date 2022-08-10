@@ -22,6 +22,4 @@ TEST_F(TaskTest, TestOerator){
 	EXPECT_EQ(isGrater, false);
 	bool isGrater2 = RTtask1 > RTtask2;
 	EXPECT_EQ(isGrater2, true);
-	bool isGrater3 = RTtask1 > 40  ;
-	EXPECT_EQ(isGrater3, true);
 };
