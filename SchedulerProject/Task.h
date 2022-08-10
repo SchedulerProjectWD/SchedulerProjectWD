@@ -7,9 +7,8 @@ enum class eType { real_time, low, high };
 class Task
 {
 public:
-	Task(int taskId, eType type, int (*func)(void*),
-		int arriavlTime, int priority = 0, void* args = nullptr);
-
+	Task(int taskId, int type, int (*func)(void*), int arriavlTime,
+		int timeOut, int priority, void* args);
 	eType getType()		 const { return eType(this->type); }
 	int getTaskId()		 const { return this->taskId; }
 	auto getFunc()		 const { return this->func; }
