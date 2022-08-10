@@ -1,14 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="MultiLevelQueue.cpp" />
-    <ClCompile Include="SchedulerProject.cpp" />
     <ClCompile Include="FCFSSchedule.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="PrioritySchedule.cpp" />
     <ClCompile Include="ScheduleMethod.cpp" />
-    <ClCompile Include="SchedulerProject.cpp" />
     <ClCompile Include="Task.cpp" />
+    <ClCompile Include="SchedulerProject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Timer.h" />

@@ -1,3 +1,4 @@
+#pragma once
 #include "ScheduleMethod.h"
 #include "Task.h"
 

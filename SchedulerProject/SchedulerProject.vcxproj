@@ -140,7 +140,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="MultiLevelQueue.cpp" />
-    <ClCompile Include="SchedulerProject.cpp" />
     <ClCompile Include="FCFSSchedule.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="PrioritySchedule.cpp" />
