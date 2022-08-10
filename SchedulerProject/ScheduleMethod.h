@@ -9,8 +9,8 @@ protected:
 	int doneTasks;
 	int closeToStarvation;
 	eType type;
-public:	
-	ScheduleMethod(int limitTasksToExec, int closeToStarvation);
+public:
+	ScheduleMethod(int limitTasksToExec, int closeToStarvation, eType type);
 	eType getType() const;
 	int getLimitTasksToExec() const;
 	int getDoneTasks() const;
@@ -23,5 +23,3 @@ public:
 	virtual int GetNumWaitingTasks() = 0;
 	virtual LinkedList<Task>* DetectSystem(int limit = 0) = 0;
 };
-
- 

@@ -4,15 +4,13 @@
 #include "Task.h"
 #include <exception>
 
-MultiLevelQueue::MultiLevelQueue(int maxCapacity ,
-							int PriorityLimitTasksToExec, int PriorityCloseToStarvation,
-							int FCFSlimitTasksToExec, int FCFScloseToStarvation) 
-	:maxCapacity(maxCapacity),currentSize(0)
+MultiLevelQueue::MultiLevelQueue(int maxCapacity)
+	:maxCapacity(maxCapacity), currentSize(0)
 {
-	queues = new ScheduleMethod * [queuesCount];
-	queues[0] = new PrioritySchedule(PriorityLimitTasksToExec,maxCapacity,PriorityCloseToStarvation);
-	queues[1] = new FCFSSchedule(FCFSlimitTasksToExec,FCFScloseToStarvation ,eType::high);
-	queues[2] = new FCFSSchedule(FCFSlimitTasksToExec, FCFScloseToStarvation, eType::low);
+	queues = new ScheduleMethod * [QUEUES_COUNT];
+	queues[0] = new PrioritySchedule(maxCapacity / 2, maxCapacity, CLOSE_TO_STARVATION_RT);
+	queues[1] = new FCFSSchedule(maxCapacity / 4, CLOSE_TO_STARVATION_HIGH, eType::high);
+	queues[2] = new FCFSSchedule(maxCapacity / 5, CLOSE_TO_STARVATION_LOW, eType::low);
 }
 
 bool MultiLevelQueue::IsEmpty() {
@@ -41,7 +39,7 @@ bool MultiLevelQueue::AddNewTask(Task* newTask) {
 	{
 		bool result = false;
 		int i = 0;
-		while (i < queuesCount)
+		while (i < QUEUES_COUNT)
 		{
 			if (newTask->getType() == queues[i]->getType())
 				result = queues[i]->Insert(newTask);
@@ -72,10 +70,8 @@ ScheduleMethod* MultiLevelQueue::operator[](eType type) {
 	return nullptr;
 }
 
-MultiLevelQueue& MultiLevelQueue::getMLQ(int maxCapacity = 100
-	                   , int PriorityLimitTasksToExec = 10, int PriorityCloseToStarvation = 10
-	                   , int FCFSlimitTasksToExec =7, int FCFScloseToStarvation=15)
+MultiLevelQueue& MultiLevelQueue::getMLQ(int maxCapacity = 30)
 {
-	static MultiLevelQueue MLQ(maxCapacity ,PriorityLimitTasksToExec,PriorityCloseToStarvation,FCFSlimitTasksToExec,FCFScloseToStarvation);
+	static MultiLevelQueue MLQ(maxCapacity);
 	return MLQ;
 }

@@ -1,14 +1,14 @@
 #include "Task.h"
 #include "ScheduleMethod.h"
 #include "LinkedList.h"
+#include "MaxHeap.h"
 #include <iostream>
 
 using namespace std;
 
-class PrioritySchedule :ScheduleMethod
+class PrioritySchedule : public ScheduleMethod
 {
 private:
-
 	MaxHeap<Task>* queue;
 	const int MaxPriority = 200;
 public:
@@ -19,8 +19,5 @@ public:
 	bool Insert(Task* task);
 	int GetNumWaitingTasks();
 	bool InsertFromAnotherQueue(Task* task);
-	LinkedList<Task>* DetectSystem( int limit);
-}; 
-
-
-
+	LinkedList<Task>* DetectSystem(int limit);
+};
