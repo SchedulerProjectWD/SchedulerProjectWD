@@ -3,13 +3,11 @@
   <ItemGroup>
     <ClCompile Include="FCFSSchedule.cpp" />
     <ClCompile Include="ScheduleMethod.cpp" />
-    <ClCompile Include="MaxHeap.cpp" />
-    <ClCompile Include="LinkedList.cpp" />
-    <ClCompile Include="Node.cpp" />
-    <ClCompile Include="Queue.cpp" />
     <ClCompile Include="SchedulerProject.cpp" />
     <ClCompile Include="Task.cpp" />
     <ClCompile Include="PrioritySchedule.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="MultiLevelQueue.cpp" />
     <ClCompile Include="Enum.cpp" />
   </ItemGroup>
@@ -22,6 +20,9 @@
     <ClInclude Include="MaxHeap.h" />
     <ClInclude Include="ScheduleMethod.h" />
     <ClInclude Include="PrioritySchedule.h" />
+    <ClInclude Include="LogRecord.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="MultiLevelQueue.h" />
     <ClInclude Include="Enum.h" />
     <ClInclude Include="Timer.h" />

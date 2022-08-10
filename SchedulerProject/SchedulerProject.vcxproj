@@ -141,19 +141,19 @@
   <ItemGroup>
     <ClCompile Include="Enum.cpp" />
     <ClCompile Include="FCFSSchedule.cpp" />
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="MultiLevelQueue.cpp" />
     <ClCompile Include="PrioritySchedule.cpp" />
     <ClCompile Include="ScheduleMethod.cpp" />
-    <ClCompile Include="MaxHeap.cpp" />
-    <ClCompile Include="LinkedList.cpp" />
-    <ClCompile Include="Node.cpp" />
-    <ClCompile Include="Queue.cpp" />
     <ClCompile Include="SchedulerProject.cpp" />
     <ClCompile Include="Task.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enum.h" />
     <ClInclude Include="FCFSSchedule.h" />
+    <ClInclude Include="Logger.h" />
+    <ClInclude Include="LogRecord.h" />
     <ClInclude Include="MultiLevelQueue.h" />
     <ClInclude Include="PrioritySchedule.h" />
     <ClInclude Include="Task.h" />
