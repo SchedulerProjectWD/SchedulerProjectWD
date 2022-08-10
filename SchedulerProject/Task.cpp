@@ -27,16 +27,15 @@ bool operator>(const Task& task1, const Task& task2)
     return task1.priority > task2.priority;
 }
 
-bool operator>(const Task& task, const int priority)
+bool Task::operator>(const int otherPriotity)
 {
-    return task.priority > priority;
+    return this->priority > otherPriotity;
 }
 
-bool operator<(const Task& task, const int priority)
+bool Task::operator<(const int otherPriotity)
 {
-    return task.priority < priority;
+    return this->priority < otherPriotity;;
 }
-
 
 void Task::operator=(int priority)
 {
