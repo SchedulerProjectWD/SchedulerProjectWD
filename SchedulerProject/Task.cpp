@@ -1,10 +1,11 @@
 #include "Task.h"
+#include "ScheduleMethod.h"
 
 Task::Task(int taskId, int type, int (*func)(void*), int arriavlTime,
            int timeOut, int priority, void* args)
 {
     this->taskId = taskId;
-    this->type = (Task::eType)type;
+    this->type = (eType)type;
     this->func = *func;
     this->arriavlTime = arriavlTime;
     this->timeOut = timeOut;
@@ -47,3 +48,5 @@ bool Task::Start()
     func(args);
     return true;
 }
+
+ 

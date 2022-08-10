@@ -3,7 +3,7 @@
 #include "MaxHeap.h"
 #include "ScheduleMethod.h"
 #include "PrioritySchedule.h"
-#include "Timer.h"
+//#include "Timer.h"
 
 //c-tor & d-tor
 PrioritySchedule::PrioritySchedule(int limitTasksToExec, int limitSize, int closeToStarvation) : ScheduleMethod(limitTasksToExec, closeToStarvation) {
@@ -23,7 +23,7 @@ bool PrioritySchedule::Insert(Task* task) { return queue->Insert(task); }
 
 //insert task which arrives from the high/low queue
 inline bool PrioritySchedule::InsertFromAnotherQueue(Task* task) {
-	int currentTime = Timer::GetTime();
+	int currentTime = 0;//Timer :: currentTime();
 
 	//determine what priority the task would get:
 	int task_priority = MaxPriority;     //default value
@@ -32,12 +32,11 @@ inline bool PrioritySchedule::InsertFromAnotherQueue(Task* task) {
 		//set the task_priority to be one less the starved task
 	   //(which ensures the execution task immediately after)
 	Task** highestPriorityTasks = new Task * [10];
-	int waitingTime;
 	for (size_t i = 0; i < 10; i++)
 	{
 
 		highestPriorityTasks[i] = queue->ExtractMax();
-		waitingTime = currentTime - highestPriorityTasks[i]->getArriavlTime();
+		int waitingTime = currentTime - highestPriorityTasks[i]->getArriavlTime();
 		if (highestPriorityTasks[i] && waitingTime >= closeToStarvation)
 			task_priority = min(task_priority, highestPriorityTasks[i]->getPriority() - 1);
 	}
