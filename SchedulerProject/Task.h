@@ -19,8 +19,9 @@ public:
 	bool Start();
 	friend bool operator<(const Task& task1, const Task& task2);
 	friend bool operator>(const Task& task1, const Task& task2);
-	bool operator>(const int otherPriotity);
-	bool operator<( const int otherPriotity);
+	friend bool operator>=(const Task& task1, const Task& task2);
+	bool operator>(const int otherPriotity) const;
+	bool operator<( const int otherPriotity) const;
 	void operator=(int priority);
 private:
 	void* args;

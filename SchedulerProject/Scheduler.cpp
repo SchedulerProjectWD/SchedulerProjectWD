@@ -4,12 +4,13 @@
 
 Scheduler::Scheduler() {
 	MLQ = &(MultiLevelQueue::getMLQ(MAX_CAPACITY));
+	//cout << MLQ << endl;
 	//logger = new Logger("");
 }
 
 Scheduler::~Scheduler()
 {
-	delete MLQ;
+	//delete MLQ;
 }
 
 void Scheduler::AvoidStarvation() {
@@ -24,22 +25,22 @@ void Scheduler::AvoidStarvation() {
 
 int Scheduler::SystemActivation()
 {
-	while (true)
+	while (!MLQ->IsEmpty())
 	{
 		eType currentType;
-		if (!(*MLQ)[eType::real_time]->IsEmpty() &&
+		if (!((*MLQ)[eType::real_time]->IsEmpty()) &&
 			(*MLQ)[eType::real_time]->getDoneTasks() <= (*MLQ)[eType::real_time]->getLimitTasksToExec())
 		{
 			currentType = eType::real_time;
 		}
 		else
-			if (!(*MLQ)[eType::high]->IsEmpty() &&
+			if (!((*MLQ)[eType::high]->IsEmpty()) &&
 				(*MLQ)[eType::high]->getDoneTasks() <= (*MLQ)[eType::high]->getLimitTasksToExec())
 			{
 				currentType = eType::high;
 			}
 			else
-				if ((*MLQ)[eType::low]->IsEmpty() &&
+				if (!((*MLQ)[eType::low]->IsEmpty()) &&
 					(*MLQ)[eType::low]->getDoneTasks() <= (*MLQ)[eType::low]->getLimitTasksToExec())
 				{
 					currentType = eType::low;
@@ -47,7 +48,9 @@ int Scheduler::SystemActivation()
 				else
 					continue;
 		currentTask = (*MLQ)[currentType]->ScheduleTask();
+		MLQ->decreaseCurrentSize();
 		bool success = currentTask->Start();
+		Timer::IncreaseTime();
 		//use logger:
 		///logRecord* record=new logRecord(currentType,success+);
 		//logger << 
@@ -55,4 +58,5 @@ int Scheduler::SystemActivation()
 		if (Timer::GetTime() % TIME_TO_DETECT_SYSTEM == 0)
 			AvoidStarvation();
 	}
+	return 0;
 }

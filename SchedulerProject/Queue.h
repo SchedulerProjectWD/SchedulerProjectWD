@@ -8,7 +8,7 @@ class Queue
 private:
 	LinkedList<T>* list;
 public:
-	Queue() { list = new LinkedList<T>(); }
+	Queue() { list = new LinkedList<T>; }
 	bool is_empty() { return list->getHead() == nullptr; }
 	void enqueue(T* in) { list->addToBack(in); }
 	T* dequeue() { return list->popFront(); }

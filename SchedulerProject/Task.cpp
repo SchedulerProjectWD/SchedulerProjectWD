@@ -6,7 +6,7 @@ Task::Task(int taskId, int type, int (*func)(void*), int arriavlTime,
 {
     this->taskId = taskId;
     this->type = (eType)type;
-    this->func = *func;
+    this->func = func;
     this->arriavlTime = arriavlTime;
     this->timeOut = timeOut;
     this->priority = priority;
@@ -27,14 +27,19 @@ bool operator>(const Task& task1, const Task& task2)
     return task1.priority > task2.priority;
 }
 
-bool Task::operator>(const int otherPriotity)
+bool operator>=(const Task& task1, const Task& task2)
 {
-    return this->priority > otherPriotity;
+    return !(task1 < task2);
 }
 
-bool Task::operator<(const int otherPriotity)
+bool Task::operator>(const int otherPriotity) const
 {
-    return this->priority < otherPriotity;;
+    return priority > otherPriotity;
+}
+
+bool Task::operator<(const int otherPriotity) const
+{
+    return priority < otherPriotity;;
 }
 
 void Task::operator=(int priority)

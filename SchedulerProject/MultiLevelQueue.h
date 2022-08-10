@@ -12,6 +12,7 @@ private:
 	const int CLOSE_TO_STARVATION_LOW = 3;
 	const int CLOSE_TO_STARVATION_RT = 3;
 	MultiLevelQueue(int maxCapacity);
+	MultiLevelQueue() = delete;
 
 public:
 	int getCurrentSize();
