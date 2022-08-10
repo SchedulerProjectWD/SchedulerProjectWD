@@ -4,20 +4,18 @@
 
 Scheduler::Scheduler() {
 	MLQ = &(MultiLevelQueue::getMLQ(MAX_CAPACITY));
-	//cout << MLQ << endl;
-	//logger = new Logger("");
+	//logger = new Logger("log.bin");
 }
 
 Scheduler::~Scheduler()
 {
-	//delete MLQ;
 }
 
 void Scheduler::AvoidStarvation() {
 
 	for (int i = 0; i < MLQ->getQueuesCount(); i++)
 	{
-		LinkedList<Task>* starvedFCFSTasks=(*MLQ)[i]->DetectSystem();
+		LinkedList<Task>* starvedFCFSTasks = (*MLQ)[i]->DetectSystem();
 		if (starvedFCFSTasks)
 			((PrioritySchedule*)(*MLQ)[eType::real_time])->InsertFromAnotherQueue(starvedFCFSTasks);
 	}
@@ -25,8 +23,10 @@ void Scheduler::AvoidStarvation() {
 
 int Scheduler::SystemActivation()
 {
-	while (!MLQ->IsEmpty())
+	while (true)
 	{
+		if (MLQ->IsEmpty())
+			break;//lock with CV
 		eType currentType;
 		if (!((*MLQ)[eType::real_time]->IsEmpty()) &&
 			(*MLQ)[eType::real_time]->getDoneTasks() <= (*MLQ)[eType::real_time]->getLimitTasksToExec())
@@ -51,9 +51,9 @@ int Scheduler::SystemActivation()
 		MLQ->decreaseCurrentSize();
 		bool success = currentTask->Start();
 		Timer::IncreaseTime();
-		//use logger:
-		///logRecord* record=new logRecord(currentType,success+);
-		//logger << 
+		//use logger: -> the message is according success value...
+		///logRecord* record;
+		//logger << record
 
 		if (Timer::GetTime() % TIME_TO_DETECT_SYSTEM == 0)
 			AvoidStarvation();
