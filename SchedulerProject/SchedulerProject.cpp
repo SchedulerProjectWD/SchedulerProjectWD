@@ -10,7 +10,7 @@ using namespace std;
 int Timer::time = 0;
 int main()
 {
-	Task t(1, 1, nullptr, 1, 100);
+	Task t(1, 1, nullptr, 1, 3, 100);
 	MaxHeap<Task> heap(7);
 	Queue<Task> q;
 	heap.Insert(&t);

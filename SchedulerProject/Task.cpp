@@ -1,12 +1,13 @@
 #include "Task.h"
 
-Task::Task(int taskId, int type, int (*func)(void*),
-    int arriavlTime, int priority, void* args)
+Task::Task(int taskId, int type, int (*func)(void*), int arriavlTime,
+           int timeOut, int priority, void* args)
 {
     this->taskId = taskId;
     this->type = (Task::eType)type;
     this->func = *func;
     this->arriavlTime = arriavlTime;
+    this->timeOut = timeOut;
     this->priority = priority;
     this->args = args;
 }
@@ -14,14 +15,14 @@ Task::Task(int taskId, int type, int (*func)(void*),
 bool operator<(const Task& task1, const Task& task2)
 {
     if (task1.priority == task2.priority)
-        return task1.arriavlTime < task2.arriavlTime;
+        return task1.arriavlTime > task2.arriavlTime;
     return task1.priority < task2.priority;
 }
 
 bool operator>(const Task& task1, const Task& task2)
 {
     if (task1.priority == task2.priority)
-        return task1.arriavlTime > task2.arriavlTime;
+        return task1.arriavlTime < task2.arriavlTime;
     return task1.priority > task2.priority;
 }
 
