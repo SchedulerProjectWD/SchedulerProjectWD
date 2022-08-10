@@ -3,7 +3,7 @@
 #include "MaxHeap.h"
 #include "ScheduleMethod.h"
 #include "PrioritySchedule.h"
-//#include "Timer.h"
+#include "Timer.h"
 
 //c-tor & d-tor
 PrioritySchedule::PrioritySchedule(int limitTasksToExec, int limitSize, int closeToStarvation) : ScheduleMethod(limitTasksToExec, closeToStarvation) {
@@ -50,7 +50,7 @@ inline bool PrioritySchedule::InsertFromAnotherQueue(Task* task) {
 // change its priority of task which its waiting time is closing to starvation
 inline LinkedList<Task>* PrioritySchedule::DetectSystem(int limit) //the limit variable is not used!
 {
-	int currentTime = 0;//Timer::currentTime();
+	int currentTime = Timer::GetTime();
 	int countTasks = queue->getSize();
 
 	for (size_t i = 0; i < countTasks; i++)
