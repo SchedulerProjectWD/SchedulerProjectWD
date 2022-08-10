@@ -2,15 +2,18 @@
 #include "Task.h"
 #include "LinkedList.h"
 
+static enum class eType { real_time, low, high };
+
 class ScheduleMethod
 {
 protected:
 	int limitTasksToExec;
 	int doneTasks;
 	int closeToStarvation;
-
-public:
+	eType type;
+public:	
 	ScheduleMethod(int limitTasks, int closeToStarvation);
+	eType getType() const;
 	int getLimitTasks() const;
 	int getDoneTasks() const;
 	int getCloseToStarvation() const;
@@ -22,3 +25,5 @@ public:
 	virtual int GetNumWaitingTasks() = 0;
 	virtual LinkedList<Task>* DetectSystem(int limit = 0) = 0;
 };
+
+ 

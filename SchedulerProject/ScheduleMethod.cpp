@@ -1,11 +1,14 @@
-#include "ScheduleMethod.h"
+#include "ScheduleMethod.h" 
 
 ScheduleMethod::ScheduleMethod(int limitTasks, int closeToStarvation) :
 	limitTasksToExec(limitTasks)
 	, closeToStarvation(closeToStarvation), doneTasks(0)
 {
 }
-
+inline eType ScheduleMethod::getType() const
+{
+	return (eType)type;
+}
 inline int ScheduleMethod::getLimitTasks() const
 {
 	return limitTasksToExec;
@@ -30,3 +33,5 @@ inline void ScheduleMethod::ResetDoneTasks()
 {
 	doneTasks = 0;
 }
+
+ 
