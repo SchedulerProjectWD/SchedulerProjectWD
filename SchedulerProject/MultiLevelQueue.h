@@ -18,6 +18,7 @@ public:
 	int getMaxCapacity();
 	bool IsEmpty();
 	bool IsFull();
+	int getQueuesCount();
 	void decreaseCurrentSize();
 	bool AddNewTask(Task* newTask);
 	ScheduleMethod* operator[](int index);

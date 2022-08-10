@@ -2,6 +2,7 @@
 #include "Task.h"
 #include "MaxHeap.h"
 #include "ScheduleMethod.h"
+#include "LinkedList.h"
 #include "PrioritySchedule.h"
 #include "Timer.h"
 
@@ -24,8 +25,7 @@ bool PrioritySchedule::Insert(Task* task) { return queue->Insert(task); }
 
 //insert task which arrives from the high/low queue
 inline bool PrioritySchedule::InsertFromAnotherQueue(Task* task) {
-	int currentTime = 0;//Timer :: currentTime();
-
+	int currentTime = Timer::GetTime();
 	//determine what priority the task would get:
 	int task_priority = MaxPriority;     //default value
 		//check the top 10 tasks in the queue 
@@ -35,8 +35,9 @@ inline bool PrioritySchedule::InsertFromAnotherQueue(Task* task) {
 	Task** highestPriorityTasks = new Task * [10];
 	for (size_t i = 0; i < 10; i++)
 	{
-
 		highestPriorityTasks[i] = queue->ExtractMax();
+		if (highestPriorityTasks[i] == nullptr)
+			break;
 		int waitingTime = currentTime - highestPriorityTasks[i]->getArriavlTime();
 		if (highestPriorityTasks[i] && waitingTime >= closeToStarvation)
 			task_priority = min(task_priority, highestPriorityTasks[i]->getPriority() - 1);
@@ -45,6 +46,17 @@ inline bool PrioritySchedule::InsertFromAnotherQueue(Task* task) {
 		queue->Insert(highestPriorityTasks[i]);
 	task->setPriority(task_priority);
 	return queue->Insert(task);
+}
+
+inline bool PrioritySchedule::InsertFromAnotherQueue(LinkedList<Task>* starvedTasks) {
+
+	Node<Task>* ptr= starvedTasks->getHead();
+	int len = starvedTasks->getLength();
+	while (ptr)
+	{
+		InsertFromAnotherQueue(ptr->data);
+		ptr = ptr->next;
+	}
 }
 
 //check the waiting time of tasks .
