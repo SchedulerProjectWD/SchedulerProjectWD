@@ -111,6 +111,8 @@ inline bool MaxHeap<T>::IsEmpty()
 template<class T>
 inline T* MaxHeap<T>::ExtractMax()
 {
+	if (IsEmpty())
+		return nullptr;
 	T* maxItem = heap[0];
 	size--;
 	heap[0] = heap[size];
