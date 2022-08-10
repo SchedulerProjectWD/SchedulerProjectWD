@@ -24,7 +24,7 @@ Task* PrioritySchedule::ScheduleTask() { return queue->ExtractMax(); }
 bool PrioritySchedule::Insert(Task* task) { return queue->Insert(task); }
 
 //insert task which arrives from the high/low queue
-inline bool PrioritySchedule::InsertFromAnotherQueue(Task* task) {
+bool PrioritySchedule::InsertFromAnotherQueue(Task* task) {
 	int currentTime = Timer::GetTime();
 	//determine what priority the task would get:
 	int task_priority = MaxPriority;     //default value
@@ -48,20 +48,22 @@ inline bool PrioritySchedule::InsertFromAnotherQueue(Task* task) {
 	return queue->Insert(task);
 }
 
-inline bool PrioritySchedule::InsertFromAnotherQueue(LinkedList<Task>* starvedTasks) {
+bool PrioritySchedule::InsertFromAnotherQueue(LinkedList<Task>* starvedTasks) {
 
-	Node<Task>* ptr= starvedTasks->getHead();
+	Node<Task>* ptr = starvedTasks->getHead();
 	int len = starvedTasks->getLength();
 	while (ptr)
 	{
-		InsertFromAnotherQueue(ptr->data);
+		if (!InsertFromAnotherQueue(ptr->data))
+			return false;
 		ptr = ptr->next;
 	}
+	return true;
 }
 
 //check the waiting time of tasks .
 // change its priority of task which its waiting time is closing to starvation
-inline LinkedList<Task>* PrioritySchedule::DetectSystem(int limit) //the limit variable is not used!
+LinkedList<Task>* PrioritySchedule::DetectSystem(int limit) //the limit variable is not used!
 {
 	int currentTime = Timer::GetTime();
 	int countTasks = queue->getSize();

@@ -10,17 +10,18 @@ eType ScheduleMethod::getType() const
 {
 	return (eType)type;
 }
-inline int ScheduleMethod::getLimitTasksToExec() const
+
+int ScheduleMethod::getLimitTasksToExec() const
 {
 	return limitTasksToExec;
 }
 
-inline int ScheduleMethod::getDoneTasks() const
+int ScheduleMethod::getDoneTasks() const
 {
 	return doneTasks;
 }
 
-inline int ScheduleMethod::getCloseToStarvation() const
+int ScheduleMethod::getCloseToStarvation() const
 {
 	return closeToStarvation;
 }
