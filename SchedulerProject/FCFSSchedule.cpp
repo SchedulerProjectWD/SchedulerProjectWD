@@ -2,8 +2,8 @@
 #include "Node.h"
 #include <climits>
 
-FCFSSchedule::FCFSSchedule(int limitTasksToExec, int closeToStarvation)
-	:ScheduleMethod(limitTasksToExec, closeToStarvation)
+FCFSSchedule::FCFSSchedule(int limitTasksToExec, int closeToStarvation, eType type)
+	:ScheduleMethod(limitTasksToExec, closeToStarvation, type)
 {
 	queue = new Queue<Task>();
 }

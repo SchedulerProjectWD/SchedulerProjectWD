@@ -5,7 +5,7 @@ using namespace std;
 
 Logger::Logger(const char* path) :positionRead(0) {
 
-	fileStream.open(path, ios::in | ios::out | ios::app | ios::binary);
+	fileStream.open(path, ios::in | ios::out | ios::binary);
 	if (!fileStream)
 		throw exception("could not open file");
 }
@@ -20,7 +20,7 @@ Logger::~Logger()
 	{
 		fileStream.read((char*)&record, sizeof(LogRecord));
 		string mes(record.message);
-		strRecord = "time: " + to_string(record.time) + "; message: "+mes+";\n";
+		strRecord = "time: " + to_string(record.time) + "; message: " + mes + ";\n";
 		logFile << strRecord;
 	}
 	logFile.close();

@@ -7,10 +7,8 @@
 
 //c-tor & d-tor
 PrioritySchedule::PrioritySchedule(int limitTasksToExec, int limitSize, int closeToStarvation)
-	: ScheduleMethod(limitTasksToExec, closeToStarvation)
-{
+	: ScheduleMethod(limitTasksToExec, closeToStarvation, eType::real_time) {
 	queue = new MaxHeap<Task>(limitSize);
-	type = eType::real_time;
 }
 PrioritySchedule::~PrioritySchedule() {
 	delete queue;
@@ -30,22 +28,20 @@ inline bool PrioritySchedule::InsertFromAnotherQueue(Task* task) {
 
 	//determine what priority the task would get:
 	int task_priority = MaxPriority;     //default value
-		//check the top 10 tasks in the queue if there is a task that close to starvation
+		//check the top 10 tasks in the queue 
+		// if there a task that close to starvation
 		//set the task_priority to be one less the starved task
-	   //(what ensures the execution task immediately after)
+	   //(which ensures the execution task immediately after)
 	Task** highestPriorityTasks = new Task * [10];
 	for (size_t i = 0; i < 10; i++)
 	{
 
 		highestPriorityTasks[i] = queue->ExtractMax();
-		if (highestPriorityTasks[i] == nullptr)
-			     break;
 		int waitingTime = currentTime - highestPriorityTasks[i]->getArriavlTime();
-		if (waitingTime >= closeToStarvation)
+		if (highestPriorityTasks[i] && waitingTime >= closeToStarvation)
 			task_priority = min(task_priority, highestPriorityTasks[i]->getPriority() - 1);
 	}
-	//put back the 10 highest priority tasks that were extracted .
-	for (size_t i = 0; i < 10 && highestPriorityTasks[i] != nullptr; i++)   
+	for (size_t i = 0; i < 10; i++)    //put back the 10 highest priority tasks that were extracted .
 		queue->Insert(highestPriorityTasks[i]);
 	task->setPriority(task_priority);
 	return queue->Insert(task);
@@ -66,5 +62,3 @@ inline LinkedList<Task>* PrioritySchedule::DetectSystem(int limit) //the limit v
 	}
 	return nullptr;
 }
-
-
