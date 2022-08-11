@@ -2,6 +2,8 @@
 #include "LogRecord.h"
 #include "constDefinitions.h"
 #include <string>
+#include <ctime>
+#define _CRT_SECURE_NO_WARNINGS
 using namespace std;
 
 Logger::Logger(const char* path) :positionRead(0), countWrite(0), path(path) {}
@@ -13,13 +15,19 @@ Logger::~Logger()
 	ofstream logFile("history_log.txt", ios::in | ios::out | ios::app);
 	if (!logFile)
 		throw exception("could not open file");
+
+	//get the current time and write in the history log
+	time_t now = time(0);
+	char currentTime[26] = {};
+	ctime_s(currentTime, 26, &now);
+	logFile << currentTime;
 	positionRead = 0;
 	for (int i = 0; i < GetLength(); i++)
 	{
 		*this >> record;
 		++(*this);
-		string mes(record.message);
-		strRecord = "time: " + to_string(record.time) + "; message: " + mes.c_str() + ";\n";
+		strRecord = "time: " + to_string(record.time) +
+			"; message: " + record.message + ";\n";
 		logFile << strRecord;
 	}
 	remove("log.bin");
@@ -82,3 +90,4 @@ bool Logger::operator!()
 {
 	return !fileStream;
 }
+

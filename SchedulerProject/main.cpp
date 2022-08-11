@@ -33,24 +33,24 @@ int lowwww(void* a)
 
 int main()
 {
-	Logger log("log.bin");
-	LogRecord rec(INFO, "infoooooooooooooooooooo");
-	LogRecord r;
+	//Logger log("log.bin");
+	//LogRecord rec(INFO, "infoooooooooooooooooooo");
+	//LogRecord r;
 
-	log << rec;
-	rec.setMessage("222222222");
-	log << rec;
-	rec.setMessage( "3333333333");
-	log << rec;
-	rec.setMessage( "44444444");
-	log << rec;
-	cout << "seek: " << log.GetLength() << endl;
-	for (size_t i = 0; i < log.GetLength(); i++)
-	{
-		log >> r;
-		cout << r.message << endl;
-		++log;
-	}
+	//log << rec;
+	//rec.setMessage("222222222");
+	//log << rec;
+	//rec.setMessage( "3333333333");
+	//log << rec;
+	//rec.setMessage( "44444444");
+	//log << rec;
+	//cout << "seek: " << log.GetLength() << endl;
+	//for (size_t i = 0; i < log.GetLength(); i++)
+	//{
+	//	log >> r;
+	//	cout << r.message << endl;
+	//	++log;
+	//}
 	//LogRecord rec1(INFO, "newww");
 
 	//log << rec1;

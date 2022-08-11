@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string.h>
 #include "Timer.h"
+#include "constDefinitions.h"
 #define _CRT_SECURE_NO_WARNINGS
 using namespace std;
 
@@ -21,13 +22,25 @@ struct LogRecord
 {
 	LogType type;
 	int time;
+	//for message about tasks
+	int taskId;
+	int arrivalTime;
+	int timeOut;
 	char message[MESSAGE_SIZE];
-	LogRecord() :type(INFO), message(""), time(0) { }
-	LogRecord(LogType type, const char* message) :
-		type(type), time(Timer::GetTime()) {
+
+	LogRecord()
+		:type(INFO), taskId(0), message(""), time(0)
+	{ }
+
+	LogRecord(LogType type, const char* message,
+		int taskId = DEFAULT_VALUE,
+		int arrivalTime = DEFAULT_VALUE, int timeOut = DEFAULT_VALUE) :
+		type(type), time(Timer::GetTime()),
+		taskId(taskId), arrivalTime(arrivalTime) , timeOut(DEFAULT_VALUE)
+	{
 		strcpy_s((char*)this->message, strlen(message) + 1, message);
 	}
-	void setMessage(const char* message) {
+	/*void setMessage(const char* message) {
 		strcpy_s((char*)this->message, strlen(message) + 1, message);
-	}
+	}*/
 };

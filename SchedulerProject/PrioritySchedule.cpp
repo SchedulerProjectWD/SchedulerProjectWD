@@ -5,6 +5,7 @@
 #include "LinkedList.h"
 #include "PrioritySchedule.h"
 #include "Timer.h"
+#include "constDefinitions.h"
 
 //c-tor & d-tor
 PrioritySchedule::PrioritySchedule(int limitTasksToExec, int limitSize, int closeToStarvation)
@@ -28,12 +29,13 @@ bool PrioritySchedule::InsertFromAnotherQueue(Task* task) {
 	int currentTime = Timer::GetTime();
 	//determine what priority the task would get:
 	int task_priority = MaxPriority;     //default value
-		//check the top 10 tasks in the queue 
-		// if there a task that close to starvation
-		//set the task_priority to be one less the starved task
-	   //(which ensures the execution task immediately after)
-	Task** highestPriorityTasks = new Task * [10];
-	for (size_t i = 0; i < 10; i++)
+
+	//check the top 10 tasks in the queue 
+	// if there a task that close to starvation
+	//set the task_priority to be one less the starved task
+	//(which ensures the execution task immediately after)
+	Task** highestPriorityTasks = new Task * [MAX_STARVED_TASKS_RT];
+	for (size_t i = 0; i < MAX_STARVED_TASKS_RT; i++)
 	{
 		highestPriorityTasks[i] = queue->ExtractMax();
 		if (highestPriorityTasks[i] == nullptr)

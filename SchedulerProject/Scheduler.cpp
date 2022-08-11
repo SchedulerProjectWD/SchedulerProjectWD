@@ -10,6 +10,7 @@ Scheduler::Scheduler() :currentTask(nullptr) {
 
 Scheduler::~Scheduler()
 {
+	delete logger;
 }
 
 void Scheduler::newRound() {
@@ -66,9 +67,12 @@ int Scheduler::SystemActivation()
 		bool success = currentTask->Start();
 		Timer::IncreaseTime();
 		(*MLQ)[currentType]->IncreaseDoneTasks();
+		LogRecord logMessage(INFO, "thw task got executed successfuly", 
+			currentTask->getTaskId(),currentTask->getArriavlTime(),currentTask->getTimeOut());
+		*logger << logMessage;
 		//use logger: -> the message is according success value...
-		///logRecord* record;
-		//logger << record
+		//if (success)
+			//logMessage.type = (int)(TASK | INFO);
 
 		if (Timer::GetTime() % TIME_TO_DETECT_SYSTEM == 0)
 			AvoidStarvation();
