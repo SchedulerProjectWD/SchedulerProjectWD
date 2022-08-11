@@ -12,7 +12,7 @@ Scheduler::~Scheduler()
 }
 
 void Scheduler::newRound() {
-	for (size_t i = 0; i < MLQ->getQueuesCount(); i++)
+	for (int i = 0; i < MLQ->getQueuesCount(); i++)
 	{
 		(*MLQ)[i]->ResetDoneTasks();
 	}

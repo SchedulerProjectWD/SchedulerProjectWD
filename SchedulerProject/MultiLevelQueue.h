@@ -1,16 +1,13 @@
 #pragma once
 #include "ScheduleMethod.h"
 #include "Task.h"
+#include "constDefinitions.h"
 
 class MultiLevelQueue {
 private:
 	ScheduleMethod** queues;
 	int currentSize;
 	int maxCapacity;
-	const int QUEUES_COUNT = 3;
-	const int CLOSE_TO_STARVATION_HIGH = 3;
-	const int CLOSE_TO_STARVATION_LOW = 3;
-	const int CLOSE_TO_STARVATION_RT = 3;
 	MultiLevelQueue(int maxCapacity);
 	MultiLevelQueue() = delete;
 

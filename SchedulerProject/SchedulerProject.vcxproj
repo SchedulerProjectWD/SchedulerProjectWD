@@ -149,6 +149,7 @@
     <ClCompile Include="Task.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="constDefinitions.h" />
     <ClInclude Include="Scheduler.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="FCFSSchedule.h" />

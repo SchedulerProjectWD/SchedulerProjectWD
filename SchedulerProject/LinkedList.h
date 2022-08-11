@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _LINKEDLIST_H_
-#define _LINKEDLIST_H_
 
 #include "Node.h"
 
@@ -107,6 +105,4 @@ LinkedList<T>::~LinkedList() {
 	}
 	delete prev;
 }
-
-#endif // !_LINKEDLIST_H_
 

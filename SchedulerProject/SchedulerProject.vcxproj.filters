@@ -24,6 +24,7 @@
     <ClInclude Include="ScheduleMethod.h" />
     <ClInclude Include="MultiLevelQueue.h" />
     <ClInclude Include="Scheduler.h" />
+    <ClInclude Include="constDefinitions.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SchedulerProject.vcxproj.user" />

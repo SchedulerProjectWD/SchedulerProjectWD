@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TASK_H_
-#define _TASK_H_
 
 enum class eType { real_time, low, high };
 
@@ -32,7 +30,5 @@ private:
 	int priority;
 	int timeOut;
 };
-
-#endif // !_TASK_H_
 
 
