@@ -40,7 +40,4 @@ struct LogRecord
 	{
 		strcpy_s((char*)this->message, strlen(message) + 1, message);
 	}
-	/*void setMessage(const char* message) {
-		strcpy_s((char*)this->message, strlen(message) + 1, message);
-	}*/
 };
