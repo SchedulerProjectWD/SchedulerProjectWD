@@ -2,6 +2,7 @@
 #include "Task.h"
 #include "MaxHeap.h"
 #include "ScheduleMethod.h"
+#include "LinkedList.h"
 #include "PrioritySchedule.h"
 #include "Timer.h"
 
@@ -23,9 +24,8 @@ Task* PrioritySchedule::ScheduleTask() { return queue->ExtractMax(); }
 bool PrioritySchedule::Insert(Task* task) { return queue->Insert(task); }
 
 //insert task which arrives from the high/low queue
-inline bool PrioritySchedule::InsertFromAnotherQueue(Task* task) {
-	int currentTime = 0;//Timer :: currentTime();
-
+bool PrioritySchedule::InsertFromAnotherQueue(Task* task) {
+	int currentTime = Timer::GetTime();
 	//determine what priority the task would get:
 	int task_priority = MaxPriority;     //default value
 		//check the top 10 tasks in the queue 
@@ -35,8 +35,9 @@ inline bool PrioritySchedule::InsertFromAnotherQueue(Task* task) {
 	Task** highestPriorityTasks = new Task * [10];
 	for (size_t i = 0; i < 10; i++)
 	{
-
 		highestPriorityTasks[i] = queue->ExtractMax();
+		if (highestPriorityTasks[i] == nullptr)
+			break;
 		int waitingTime = currentTime - highestPriorityTasks[i]->getArriavlTime();
 		if (highestPriorityTasks[i] && waitingTime >= closeToStarvation)
 			task_priority = min(task_priority, highestPriorityTasks[i]->getPriority() - 1);
@@ -47,9 +48,22 @@ inline bool PrioritySchedule::InsertFromAnotherQueue(Task* task) {
 	return queue->Insert(task);
 }
 
+bool PrioritySchedule::InsertFromAnotherQueue(LinkedList<Task>* starvedTasks) {
+
+	Node<Task>* ptr = starvedTasks->getHead();
+	int len = starvedTasks->getLength();
+	while (ptr)
+	{
+		if (!InsertFromAnotherQueue(ptr->data))
+			return false;
+		ptr = ptr->next;
+	}
+	return true;
+}
+
 //check the waiting time of tasks .
 // change its priority of task which its waiting time is closing to starvation
-inline LinkedList<Task>* PrioritySchedule::DetectSystem(int limit) //the limit variable is not used!
+LinkedList<Task>* PrioritySchedule::DetectSystem(int limit) //the limit variable is not used!
 {
 	int currentTime = Timer::GetTime();
 	int countTasks = queue->getSize();

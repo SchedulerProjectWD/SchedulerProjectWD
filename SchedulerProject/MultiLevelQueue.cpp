@@ -55,23 +55,27 @@ bool MultiLevelQueue::AddNewTask(Task* newTask) {
 	}
 }
 
-ScheduleMethod* MultiLevelQueue::operator[](int index) {
+int MultiLevelQueue::getQueuesCount() {
+	return QUEUES_COUNT;
+}
+
+ScheduleMethod* MultiLevelQueue:: operator[](int index) {
 	return queues[index];
 }
 
 ScheduleMethod* MultiLevelQueue::operator[](eType type) {
-	ScheduleMethod* queuePtr = queues[0];
-	while (queuePtr)
+	for (int i = 0; i < QUEUES_COUNT; i++)
 	{
-		if (queuePtr->getType() == type)
-			return queuePtr;
-		queuePtr++;
+		if (queues[i]->getType() == type)
+			return queues[i];
 	}
 	return nullptr;
 }
 
+
 MultiLevelQueue& MultiLevelQueue::getMLQ(int maxCapacity = 30)
 {
 	static MultiLevelQueue MLQ(maxCapacity);
+	cout << "create new mlq" << &MLQ << endl;
 	return MLQ;
 }

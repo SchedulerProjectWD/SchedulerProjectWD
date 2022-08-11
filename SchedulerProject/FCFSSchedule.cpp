@@ -77,5 +77,5 @@ LinkedList<Task>* FCFSSchedule::DetectSystem(int limit)
 		//delet the detected task from the Q- it passes now to deffrent DS
 		Q->deleteNode(currSmallest);
 	}
-	return tasksCloseToTimeout;
+	 return tasksCloseToTimeout;
 }

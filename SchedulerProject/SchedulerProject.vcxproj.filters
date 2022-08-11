@@ -7,7 +7,8 @@
     <ClCompile Include="PrioritySchedule.cpp" />
     <ClCompile Include="ScheduleMethod.cpp" />
     <ClCompile Include="Task.cpp" />
-    <ClCompile Include="SchedulerProject.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Scheduler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Timer.h" />
@@ -22,6 +23,7 @@
     <ClInclude Include="MaxHeap.h" />
     <ClInclude Include="ScheduleMethod.h" />
     <ClInclude Include="MultiLevelQueue.h" />
+    <ClInclude Include="Scheduler.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SchedulerProject.vcxproj.user" />

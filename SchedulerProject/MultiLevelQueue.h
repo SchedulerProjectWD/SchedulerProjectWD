@@ -12,12 +12,14 @@ private:
 	const int CLOSE_TO_STARVATION_LOW = 3;
 	const int CLOSE_TO_STARVATION_RT = 3;
 	MultiLevelQueue(int maxCapacity);
+	MultiLevelQueue() = delete;
 
 public:
 	int getCurrentSize();
 	int getMaxCapacity();
 	bool IsEmpty();
 	bool IsFull();
+	int getQueuesCount();
 	void decreaseCurrentSize();
 	bool AddNewTask(Task* newTask);
 	ScheduleMethod* operator[](int index);

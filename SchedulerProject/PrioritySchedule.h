@@ -11,6 +11,7 @@ class PrioritySchedule : public ScheduleMethod
 private:
 	MaxHeap<Task>* queue;
 	const int MaxPriority = 200;
+	bool InsertFromAnotherQueue(Task* task);
 public:
 	bool IsEmpty();
 	~PrioritySchedule();
@@ -18,6 +19,6 @@ public:
 	Task* ScheduleTask();
 	bool Insert(Task* task);
 	int GetNumWaitingTasks();
-	bool InsertFromAnotherQueue(Task* task);
+	bool InsertFromAnotherQueue(LinkedList<Task>* starvedTasks);
 	LinkedList<Task>* DetectSystem(int limit);
 };
