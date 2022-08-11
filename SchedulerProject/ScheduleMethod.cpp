@@ -26,12 +26,12 @@ int ScheduleMethod::getCloseToStarvation() const
 	return closeToStarvation;
 }
 
-inline void ScheduleMethod::IncreaseDoneTasks()
+void ScheduleMethod::IncreaseDoneTasks()
 {
 	doneTasks++;
 }
 
-inline void ScheduleMethod::ResetDoneTasks()
+void ScheduleMethod::ResetDoneTasks()
 {
 	doneTasks = 0;
 }

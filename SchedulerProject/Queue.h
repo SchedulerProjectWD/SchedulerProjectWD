@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _QUEUE_H_
-#define _QUEUE_H_
 #include "LinkedList.h"
 template<class T>
 class Queue
@@ -16,4 +14,3 @@ public:
 	LinkedList<T>* getInnerList() { return list; }
 	int getSize() { return list->getLength(); }
 };
-#endif // !_QUEUE_H_

@@ -5,6 +5,7 @@
 
 log.bin
 log.txt
+history_log.txt
 # User-specific files
 *.rsuser
 *.suo

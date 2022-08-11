@@ -1,10 +1,11 @@
 #include "Scheduler.h"
 #include "PrioritySchedule.h"
 #include "Timer.h"
+#include "constDefinitions.h"
 
 Scheduler::Scheduler() :currentTask(nullptr) {
 	MLQ = &(MultiLevelQueue::getMLQ(MAX_CAPACITY));
-	//logger = new Logger("log.bin");
+	logger = new Logger("log.bin");
 }
 
 Scheduler::~Scheduler()
@@ -53,15 +54,18 @@ int Scheduler::SystemActivation()
 				{
 					currentType = eType::low;
 				}
-				else
+				else {
 					newRound();
-	
+					continue;
+				}
+
 		//schedule a task from the chosen queue
 		currentTask = (*MLQ)[currentType]->ScheduleTask();
 		MLQ->decreaseCurrentSize();
-		if(currentTask)
+		//if(currentTask)
 		bool success = currentTask->Start();
 		Timer::IncreaseTime();
+		(*MLQ)[currentType]->IncreaseDoneTasks();
 		//use logger: -> the message is according success value...
 		///logRecord* record;
 		//logger << record

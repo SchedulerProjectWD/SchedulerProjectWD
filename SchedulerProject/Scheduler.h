@@ -3,12 +3,13 @@
 #include "Logger.h"
 #include "Task.h"
 #include "constDefinitions.h"
+#include "ScheduleMethod.h"
 
 class Scheduler {
 private:
 	MultiLevelQueue* MLQ;
 	Task* currentTask;
-	//Logger* logger;
+	Logger* logger;
 	void newRound();
 	void AvoidStarvation();
 public:
