@@ -11,6 +11,13 @@ Scheduler::~Scheduler()
 {
 }
 
+void Scheduler::newRound() {
+	for (size_t i = 0; i < MLQ->getQueuesCount(); i++)
+	{
+		(*MLQ)[i]->ResetDoneTasks();
+	}
+}
+
 void Scheduler::AvoidStarvation() {
 
 	for (int i = 0; i < MLQ->getQueuesCount(); i++)
@@ -25,6 +32,7 @@ int Scheduler::SystemActivation()
 {
 	while (true)
 	{
+		///choose a not empty queue with the highest weight 
 		if (MLQ->IsEmpty())
 			break;//lock with CV
 		eType currentType;
@@ -46,10 +54,12 @@ int Scheduler::SystemActivation()
 					currentType = eType::low;
 				}
 				else
-					continue;
+					newRound();
+	
+		//schedule a task from the chosen queue
 		currentTask = (*MLQ)[currentType]->ScheduleTask();
 		MLQ->decreaseCurrentSize();
-		//if(currentTask)
+		if(currentTask)
 		bool success = currentTask->Start();
 		Timer::IncreaseTime();
 		//use logger: -> the message is according success value...

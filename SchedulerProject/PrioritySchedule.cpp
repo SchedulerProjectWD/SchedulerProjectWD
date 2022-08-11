@@ -42,7 +42,8 @@ bool PrioritySchedule::InsertFromAnotherQueue(Task* task) {
 		if (highestPriorityTasks[i] && waitingTime >= closeToStarvation)
 			task_priority = min(task_priority, highestPriorityTasks[i]->getPriority() - 1);
 	}
-	for (size_t i = 0; i < 10; i++)    //put back the 10 highest priority tasks that were extracted .
+	//put back the 10 highest priority tasks that were extracted .
+	for (size_t i = 0; i < 10 && highestPriorityTasks[i]!=nullptr; i++)   
 		queue->Insert(highestPriorityTasks[i]);
 	task->setPriority(task_priority);
 	return queue->Insert(task);

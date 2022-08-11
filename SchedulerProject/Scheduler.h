@@ -9,6 +9,7 @@ private:
 	MultiLevelQueue* MLQ;
 	Task* currentTask;
 	//Logger* logger;
+	void newRound();
 	void AvoidStarvation();
 public:
 	int SystemActivation();
