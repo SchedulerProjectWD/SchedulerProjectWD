@@ -2,7 +2,7 @@
 #include "PrioritySchedule.h"
 #include "Timer.h"
 
-Scheduler::Scheduler() {
+Scheduler::Scheduler() :currentTask(nullptr) {
 	MLQ = &(MultiLevelQueue::getMLQ(MAX_CAPACITY));
 	//logger = new Logger("log.bin");
 }
@@ -49,6 +49,7 @@ int Scheduler::SystemActivation()
 					continue;
 		currentTask = (*MLQ)[currentType]->ScheduleTask();
 		MLQ->decreaseCurrentSize();
+		//if(currentTask)
 		bool success = currentTask->Start();
 		Timer::IncreaseTime();
 		//use logger: -> the message is according success value...

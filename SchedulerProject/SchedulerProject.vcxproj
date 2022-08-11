@@ -145,7 +145,7 @@
     <ClCompile Include="PrioritySchedule.cpp" />
     <ClCompile Include="ScheduleMethod.cpp" />
     <ClCompile Include="Scheduler.cpp" />
-    <ClCompile Include="SchedulerProject.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Task.cpp" />
   </ItemGroup>
   <ItemGroup>
