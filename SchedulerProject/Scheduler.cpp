@@ -22,10 +22,10 @@ void Scheduler::newRound() {
 
 void Scheduler::AvoidStarvation() {
 
-	for (int i = 0; i < MLQ->getQueuesCount(); i++)
+	for (int level = 0; level < MLQ->getQueuesCount(); level++)
 	{
-		LinkedList<Task>* starvedFCFSTasks = (*MLQ)[i]->DetectSystem();
-		if (starvedFCFSTasks)
+		LinkedList<Task>* starvedFCFSTasks = (*MLQ)[level]->DetectSystem();
+		if (starvedFCFSTasks)                      ///move task
 			((PrioritySchedule*)(*MLQ)[eType::real_time])->InsertFromAnotherQueue(starvedFCFSTasks);
 	}
 }
@@ -34,9 +34,9 @@ int Scheduler::SystemActivation()
 {
 	while (true)
 	{
-		///choose a not empty queue with the highest weight 
 		if (MLQ->IsEmpty())
 			break;//lock with CV
+		///choose a not empty queue with the highest weight 
 		eType currentType;
 		if (!((*MLQ)[eType::real_time]->IsEmpty()) &&
 			(*MLQ)[eType::real_time]->getDoneTasks() <= (*MLQ)[eType::real_time]->getLimitTasksToExec())
@@ -50,7 +50,7 @@ int Scheduler::SystemActivation()
 				currentType = eType::high;
 			}
 			else
-				if (!((*MLQ)[eType::low]->IsEmpty()) &&
+				if (!((*MLQ)[eType::low]->IsEmpty()) && //get current weight  
 					(*MLQ)[eType::low]->getDoneTasks() <= (*MLQ)[eType::low]->getLimitTasksToExec())
 				{
 					currentType = eType::low;

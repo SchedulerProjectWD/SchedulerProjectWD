@@ -1,5 +1,6 @@
 #include "FCFSSchedule.h"
 #include "Node.h"
+#include "Timer.h"
 #include <climits>
 
 FCFSSchedule::FCFSSchedule(int limitTasksToExec, int closeToStarvation, eType type)
@@ -36,7 +37,8 @@ int FCFSSchedule::GetNumWaitingTasks()
 
 // Function that returns smallest Remaining Time Till Timeout
 // from the queue.
-Node<Task>* FCFSSchedule::smallestRemainingTimeTillTimeout(Node<Task>* head, int curentTime)
+Node<Task>* FCFSSchedule::smallestRemainingTimeTillTimeout(
+	Node<Task>* head, int curentTime)
 {
 	// Declare a min variable and initialize
 	// it with the head
@@ -64,11 +66,11 @@ Node<Task>* FCFSSchedule::smallestRemainingTimeTillTimeout(Node<Task>* head, int
 LinkedList<Task>* FCFSSchedule::DetectSystem(int limit)
 {
 	if (this->IsEmpty()) return nullptr;
-	int currentTime = 0;//Timer::currentTime();
+	int currentTime = Timer::GetTime();
 	LinkedList<Task>* tasksCloseToTimeout = new LinkedList<Task>();
 	LinkedList<Task>* Q = queue->getInnerList();
 	for (int i = 0; i < limit; i++)
-	{
+	{ //get task close to timeOut
 		Node<Task>* currSmallest = smallestRemainingTimeTillTimeout(Q->getHead(), currentTime);
 		//no starvation detected- stop searching even though it didnt reach limit
 		if (currSmallest == nullptr) break;
