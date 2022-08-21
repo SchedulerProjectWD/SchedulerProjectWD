@@ -147,6 +147,7 @@
     <ClCompile Include="Scheduler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Task.cpp" />
+    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constDefinitions.h" />
@@ -157,6 +158,7 @@
     <ClInclude Include="LogRecord.h" />
     <ClInclude Include="PrioritySchedule.h" />
     <ClInclude Include="Task.h" />
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LinkedList.h" />

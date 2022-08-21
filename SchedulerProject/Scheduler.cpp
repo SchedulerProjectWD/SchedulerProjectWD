@@ -32,10 +32,13 @@ void Scheduler::AvoidStarvation() {
 
 int Scheduler::SystemActivation()
 {
+	std::unique_lock<std::mutex> ul(mtx, std::defer_lock);
 	while (true)
 	{
-		if (MLQ->IsEmpty())
-			break;//lock with CV
+		if (MLQ->IsEmpty()) {
+			ul.lock();
+			condVar.wait(ul, []() { return isThereWaitingTask; });
+		}
 		///choose a not empty queue with the highest weight 
 		eType currentType;
 		if (!((*MLQ)[eType::real_time]->IsEmpty()) &&
@@ -59,16 +62,17 @@ int Scheduler::SystemActivation()
 					newRound();
 					continue;
 				}
-
 		//schedule a task from the chosen queue
 		currentTask = (*MLQ)[currentType]->ScheduleTask();
 		MLQ->decreaseCurrentSize();
+		ul.unlock();
+		condVar.notify_one();
 		//if(currentTask)
 		bool success = currentTask->Start();
 		Timer::IncreaseTime();
 		(*MLQ)[currentType]->IncreaseDoneTasks();
-		LogRecord logMessage(INFO, "thw task got executed successfuly", 
-			currentTask->getTaskId(),currentTask->getArriavlTime(),currentTask->getTimeOut());
+		LogRecord logMessage(INFO, "thw task got executed successfuly",
+			currentTask->getTaskId(), currentTask->getArriavlTime(), currentTask->getTimeOut());
 		*logger << logMessage;
 		//use logger: -> the message is according success value...
 		//if (success)

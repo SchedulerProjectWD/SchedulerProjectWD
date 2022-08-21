@@ -1,3 +1,4 @@
+#pragma once
 #include "Logger.h"
 #include "LogRecord.h"
 #include "constDefinitions.h"

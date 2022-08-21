@@ -4,7 +4,6 @@
 #include "Timer.h"
 #include "constDefinitions.h"
 #define _CRT_SECURE_NO_WARNINGS
-using namespace std;
 
 const int MESSAGE_SIZE = 50;
 
@@ -12,7 +11,7 @@ enum LogType
 {
 	INFO = 1,
 	WARNING = 2,
-	ERROR = 4,
+	//ERROR = 4,
 	TASK = 8,
 	SCHEDULER = 16,
 	MLQ = 32

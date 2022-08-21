@@ -2,7 +2,7 @@
 #include "../SchedulerProject/Timer.h"
 
 
-int Timer::time = 0;
+std::atomic_int Timer::time = 0;
 TEST(TimerTest, InitializeWithZiro)
 {
 	EXPECT_EQ(Timer::GetTime(), 0);

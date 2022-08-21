@@ -28,25 +28,25 @@ public:
 };
 
 template<class T>
-inline int MaxHeap<T>::parent(int i)
+int MaxHeap<T>::parent(int i)
 {
 	return (i - 1) / 2;
 }
 
 template<class T>
-inline int MaxHeap<T>::leftChild(int i)
+int MaxHeap<T>::leftChild(int i)
 {
 	return i * 2 + 1;
 }
 
 template<class T>
-inline int MaxHeap<T>::rightChild(int i)
+int MaxHeap<T>::rightChild(int i)
 {
 	return i * 2 + 2;
 }
 
 template<class T>
-inline void MaxHeap<T>::siftUp(int i)
+void MaxHeap<T>::siftUp(int i)
 {
 	while (i > 0 && *(heap[parent(i)]) < *(heap[i]))
 	{
@@ -58,7 +58,7 @@ inline void MaxHeap<T>::siftUp(int i)
 }
 
 template<class T>
-inline void MaxHeap<T>::siftDown(int i)
+void MaxHeap<T>::siftDown(int i)
 {
 	int maxIndex, left, right;
 	T* temp;
@@ -79,20 +79,20 @@ inline void MaxHeap<T>::siftDown(int i)
 }
 
 template<class T>
-inline MaxHeap<T>::MaxHeap(int maxSize) :maxSize(maxSize), size(0), heap(new T* [maxSize])
+MaxHeap<T>::MaxHeap(int maxSize) :maxSize(maxSize), size(0), heap(new T* [maxSize])
 {
 
 }
 
 template<class T>
-inline MaxHeap<T>::~MaxHeap()
+MaxHeap<T>::~MaxHeap()
 {
 	if (heap)
 		delete[] heap;
 }
 
 template<class T>
-inline bool MaxHeap<T>::Insert(T* item)
+bool MaxHeap<T>::Insert(T* item)
 {
 	if (size == maxSize)
 		return false;
@@ -103,13 +103,13 @@ inline bool MaxHeap<T>::Insert(T* item)
 }
 
 template<class T>
-inline bool MaxHeap<T>::IsEmpty()
+bool MaxHeap<T>::IsEmpty()
 {
 	return size == 0;
 }
 
 template<class T>
-inline T* MaxHeap<T>::ExtractMax()
+T* MaxHeap<T>::ExtractMax()
 {
 	if (IsEmpty())
 		return nullptr;
@@ -121,7 +121,7 @@ inline T* MaxHeap<T>::ExtractMax()
 }
 
 template<class T>
-inline void MaxHeap<T>::ChangePriority(T* item, int priority)
+void MaxHeap<T>::ChangePriority(T* item, int priority)
 {
 	for (int i = 0; i < size; i++)
 	{
@@ -149,7 +149,7 @@ T* MaxHeap<T>::operator[](int index)
 }
 
 template<class T>
-inline int MaxHeap<T>::getSize() const
+int MaxHeap<T>::getSize() const
 {
 	return size;
 }

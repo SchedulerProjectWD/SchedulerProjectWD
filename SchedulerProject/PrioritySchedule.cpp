@@ -35,7 +35,7 @@ bool PrioritySchedule::InsertFromAnotherQueue(Task* task) {
 	//set the task_priority to be one less the starved task
 	//(which ensures the execution task immediately after)
 	Task** highestPriorityTasks = new Task * [MAX_STARVED_TASKS_RT];
-	for (size_t i = 0; i < MAX_STARVED_TASKS_RT; i++)
+	for (int i = 0; i < MAX_STARVED_TASKS_RT; i++)
 	{
 		highestPriorityTasks[i] = queue->ExtractMax();
 		if (highestPriorityTasks[i] == nullptr)
@@ -45,7 +45,7 @@ bool PrioritySchedule::InsertFromAnotherQueue(Task* task) {
 			task_priority = min(task_priority, highestPriorityTasks[i]->getPriority() - 1);
 	}
 	//put back the 10 highest priority tasks that were extracted .
-	for (size_t i = 0; i < 10 && highestPriorityTasks[i]!=nullptr; i++)   
+	for (int i = 0; i < 10 && highestPriorityTasks[i]!=nullptr; i++)   
 		queue->Insert(highestPriorityTasks[i]);
 	task->setPriority(task_priority);
 	return queue->Insert(task);
@@ -71,7 +71,7 @@ LinkedList<Task>* PrioritySchedule::DetectSystem(int limit) //the limit variable
 	int currentTime = Timer::GetTime();
 	int countTasks = queue->getSize();
 
-	for (size_t i = 0; i < countTasks; i++)
+	for (int i = 0; i < countTasks; i++)
 	{
 		int waitingTime = currentTime - (*queue)[i]->getArriavlTime();
 		if (waitingTime >= closeToStarvation)

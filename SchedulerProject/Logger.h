@@ -1,11 +1,10 @@
 #pragma once
 #include <fstream>
 #include "LogRecord.h"
-using namespace std;
 
 class Logger
 {
-	fstream fileStream;
+	std::fstream fileStream;
 	const char* path;
 	int positionRead;
 	int countWrite;

@@ -1,7 +1,10 @@
 #pragma once
 #include "ScheduleMethod.h"
-#include "Task.h"
 #include "constDefinitions.h"
+
+static std::mutex mtx;
+static std::condition_variable condVar;
+static bool isThereWaitingTask = false;
 
 class MultiLevelQueue {
 private:

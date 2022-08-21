@@ -1,7 +1,7 @@
+#pragma once
 #include "MultiLevelQueue.h"
 #include "FCFSSchedule.h"
 #include "PrioritySchedule.h"
-#include "Task.h"
 #include <exception>
 
 MultiLevelQueue::MultiLevelQueue(int maxCapacity)
@@ -76,6 +76,5 @@ ScheduleMethod* MultiLevelQueue::operator[](eType type) {
 MultiLevelQueue& MultiLevelQueue::getMLQ(int maxCapacity = 30)
 {
 	static MultiLevelQueue MLQ(maxCapacity);
-	cout << "create new mlq" << &MLQ << endl;
 	return MLQ;
 }
