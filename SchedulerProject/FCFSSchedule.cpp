@@ -35,30 +35,26 @@ int FCFSSchedule::GetNumWaitingTasks()
 	return queue->getSize();
 }
 
-// Function that returns smallest Remaining Time Till Timeout
+//Function that returns smallest Remaining Time Till Timeout
 // from the queue.
-Node<Task>* FCFSSchedule::smallestRemainingTimeTillTimeout(
-	Node<Task>* head, int curentTime)
+Node<Task>* FCFSSchedule::smallestRemainingTimeTillTimeout(Node<Task>* head, int curentTime)
 {
-	// Declare a min variable and initialize
-	// it with the head
-	Node<Task>* min = nullptr;
-	int minCloseToTimeOut = INT_MAX;
-	int waitingTime;
+	Node<Task>* minTaskDetected = nullptr;
+	int minTimeDetected = INT_MAX;
+	int tasksWaitingTime;
 	int remainTimeTillTimeout;
 
 	while (head != nullptr) {
-		waitingTime = curentTime - head->data->getArriavlTime();
-		remainTimeTillTimeout = head->data->getTimeOut() - waitingTime;
-
-		if (remainTimeTillTimeout < minCloseToTimeOut && remainTimeTillTimeout <= closeToStarvation)
+		tasksWaitingTime = curentTime - head->data->getArriavlTime();
+		remainTimeTillTimeout = head->data->getTimeOut() - tasksWaitingTime;
+		if (remainTimeTillTimeout < minTimeDetected && remainTimeTillTimeout <= closeToStarvation)
 		{
-			min = head;
-			minCloseToTimeOut = remainTimeTillTimeout;
+			minTaskDetected = head;
+			minTimeDetected = remainTimeTillTimeout;
 		}
 		head = head->next;
 	}
-	return min;
+	return minTaskDetected;
 }
 
 // Function that returns a list of size limit containing close-to-timeout
@@ -67,17 +63,18 @@ LinkedList<Task>* FCFSSchedule::DetectSystem(int limit)
 {
 	if (this->IsEmpty()) return nullptr;
 	int currentTime = Timer::GetTime();
-	LinkedList<Task>* tasksCloseToTimeout = new LinkedList<Task>();
-	LinkedList<Task>* Q = queue->getInnerList();
-	for (int i = 0; i < limit; i++)
-	{ //get task close to timeOut
-		Node<Task>* currSmallest = smallestRemainingTimeTillTimeout(Q->getHead(), currentTime);
+	LinkedList<Task>* tasksToMoveToRT = new LinkedList<Task>();
+	LinkedList<Task>* innerQ = queue->getInnerList();
+	for (int detectedTasks = 0; detectedTasks < limit; detectedTasks++)
+	{ 
+		//get task close to timeOut
+		Node<Task>* starvingTask = smallestRemainingTimeTillTimeout(innerQ->getHead(), currentTime);
 		//no starvation detected- stop searching even though it didnt reach limit
-		if (currSmallest == nullptr) break;
+		if (starvingTask == nullptr) break;
 		//if a close-to-timeout task detected, add to the detected list
-		tasksCloseToTimeout->addToBack(currSmallest->data);
+		tasksToMoveToRT->addToBack(starvingTask->data);
 		//delet the detected task from the Q- it passes now to deffrent DS
-		Q->deleteNode(currSmallest);
+		innerQ->deleteNode(starvingTask);
 	}
-	 return tasksCloseToTimeout;
+	 return tasksToMoveToRT;
 }
