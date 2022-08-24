@@ -39,28 +39,20 @@ void invokeUI(void * param)
 
 int main()
 {
-	try {
-		thread thr(invokeUI, nullptr);
-		thr.join();
-
-	}
-	catch (exception& ex)
-	{
-		cout << ex.what();
-	}
-	Task t(1, 0, helloWorld, 1, 1, 2, nullptr);
+	thread thr(invokeUI, nullptr);
+	Scheduler scheduler;
+	scheduler.SystemActivation();
+	thr.join();
+	/*Task t(1, 0, helloWorld, 1, 1, 2, nullptr);
 	Task t1(1, 0, helloWorldHigh, 1, 1, 70, nullptr);
-	Task t2(1, 1, lowwww, 1, 1, 1, nullptr);
+	Task t2(1, 1, lowwww, 1, 1, 1, nullptr);*/
 
 	//cout << &MultiLevelQueue::getMLQ(30) << endl;
-	MultiLevelQueue::getMLQ(30).AddNewTask(&t2);
+	/*MultiLevelQueue::getMLQ(30).AddNewTask(&t2);
 	MultiLevelQueue::getMLQ(30).AddNewTask(&t);
 	MultiLevelQueue::getMLQ(30).AddNewTask(&t);
-	MultiLevelQueue::getMLQ(30).AddNewTask(&t1);
+	MultiLevelQueue::getMLQ(30).AddNewTask(&t1);*/
+
 	//cout << MultiLevelQueue::getMLQ(30).getCurrentSize();
 	//cout << &MultiLevelQueue::getMLQ(30) << endl;
-
-	//Scheduler scheduler;
-	//scheduler.SystemActivation();
-
 }

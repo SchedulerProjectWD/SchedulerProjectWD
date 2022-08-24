@@ -17,8 +17,11 @@ bool MultiLevelQueue::IsEmpty() {
 	return currentSize == 0;
 }
 
-bool MultiLevelQueue::IsFull() {
-	return currentSize == maxCapacity;
+bool MultiLevelQueue::IsFull(eType type) {
+	if (type == eType::real_time)
+		return currentSize == maxCapacity;
+	//to prevent inversion , - saved space to real time tasks
+	return currentSize == maxCapacity - RESERVED_SPACE_TO_RT_TASKS;
 }
 
 int MultiLevelQueue::getMaxCapacity() {
@@ -76,7 +79,7 @@ ScheduleMethod* MultiLevelQueue::operator[](eType type) {
 }
 
 
-MultiLevelQueue& MultiLevelQueue::getMLQ(int maxCapacity = 30)
+MultiLevelQueue& MultiLevelQueue::getMLQ(int maxCapacity = MAX_CAPACITY)
 {
 	static MultiLevelQueue MLQ(maxCapacity);
 	return MLQ;

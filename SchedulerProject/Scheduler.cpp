@@ -33,7 +33,7 @@ void Scheduler::AvoidStarvation() {
 int Scheduler::SystemActivation()
 {
 	std::unique_lock<std::mutex> ul(mtx, std::defer_lock);
-	while (true)
+	while (is_active.load() || !MLQ->IsEmpty())
 	{
 		//if (MLQ->IsEmpty()) {
 		ul.lock();

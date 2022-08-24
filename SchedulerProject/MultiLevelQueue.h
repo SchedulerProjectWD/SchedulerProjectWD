@@ -19,7 +19,7 @@ public:
 	int getCurrentSize();
 	int getMaxCapacity();
 	bool IsEmpty();
-	bool IsFull();
+	bool IsFull(eType type);
 	int getQueuesCount();
 	void decreaseCurrentSize();
 	bool AddNewTask(Task* newTask);
