@@ -36,10 +36,12 @@ Task* UI::getNewTaskFromUser()
 
 bool UI::sendTaskToMLQ(Task* newTask)
 {
-	std::unique_lock<std::mutex> ul(mtx);
 	MultiLevelQueue& mlq = MultiLevelQueue::getMLQ(MAX_CAPACITY);
+	std::unique_lock<std::mutex> ul(mtx);
 	condVar.wait(ul, [&mlq]() {return !(mlq.IsFull()); });
-	return mlq.AddNewTask(newTask);
+	bool success = mlq.AddNewTask(newTask);
+	ul.unlock();
+	return success;
 }
 
 void UI::operator()(void* params)
@@ -53,8 +55,8 @@ void UI::operator()(void* params)
 		cin >> input;
 		switch (input)
 		{
-		case 1: 
-			task = getNewTaskFromUser(); 
+		case 1:
+			task = getNewTaskFromUser();
 			sendTaskToMLQ(task);
 			break;
 		default:

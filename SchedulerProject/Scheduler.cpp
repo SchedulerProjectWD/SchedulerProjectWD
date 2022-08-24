@@ -35,10 +35,10 @@ int Scheduler::SystemActivation()
 	std::unique_lock<std::mutex> ul(mtx, std::defer_lock);
 	while (true)
 	{
-		if (MLQ->IsEmpty()) {
-			ul.lock();
-			condVar.wait(ul, []() { return isThereWaitingTask; });
-		}
+		//if (MLQ->IsEmpty()) {
+		ul.lock();
+		condVar.wait(ul, []() { return isThereWaitingTask.load(); });
+		//}
 		///choose a not empty queue with the highest weight 
 		eType currentType;
 		if (!((*MLQ)[eType::real_time]->IsEmpty()) &&

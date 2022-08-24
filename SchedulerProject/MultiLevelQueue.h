@@ -1,10 +1,11 @@
 #pragma once
+#include <atomic>
 #include "ScheduleMethod.h"
 #include "constDefinitions.h"
 
 static std::mutex mtx;
 static std::condition_variable condVar;
-static bool isThereWaitingTask = false;
+static std::atomic<bool> isThereWaitingTask = false;
 
 class MultiLevelQueue {
 private:

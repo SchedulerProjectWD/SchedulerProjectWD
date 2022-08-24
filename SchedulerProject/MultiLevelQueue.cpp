@@ -32,6 +32,8 @@ int MultiLevelQueue::getCurrentSize()
 
 void MultiLevelQueue::decreaseCurrentSize() {
 	currentSize--;
+	if (currentSize == 0)
+		isThereWaitingTask.store(false);
 }
 
 bool MultiLevelQueue::AddNewTask(Task* newTask) {
@@ -47,7 +49,8 @@ bool MultiLevelQueue::AddNewTask(Task* newTask) {
 		}
 		if (result)
 			currentSize++;
-		return result;
+		isThereWaitingTask.store(true);
+			return result;
 	}
 	catch (const std::exception&)
 	{
