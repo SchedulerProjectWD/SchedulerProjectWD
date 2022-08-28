@@ -2,6 +2,8 @@
 #include "PrioritySchedule.h"
 #include "Timer.h"
 #include "constDefinitions.h"
+#include <chrono>
+#include <functional>
 
 Scheduler::Scheduler() :currentTask(nullptr) {
 	MLQ = &(MultiLevelQueue::getMLQ(MAX_CAPACITY));
@@ -30,15 +32,13 @@ void Scheduler::AvoidStarvation() {
 	}
 }
 
-int Scheduler::SystemActivation()
+int Scheduler::SystemActivation(std::condition_variable* condVar)
 {
-	std::unique_lock<std::mutex> ul(mtx, std::defer_lock);
-	while (is_active.load() || !MLQ->IsEmpty())
+	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+	while (MLQ->isActive || !MLQ->IsEmpty())
 	{
-		//if (MLQ->IsEmpty()) {
-		ul.lock();
-		condVar.wait(ul, []() { return isThereWaitingTask.load(); });
-		//}
+		std::unique_lock<std::mutex> ul(mtx);
+		(*condVar).wait(ul, [this] {return !MLQ->IsEmpty() || !MLQ->isActive; });
 		///choose a not empty queue with the highest weight 
 		eType currentType;
 		if (!((*MLQ)[eType::real_time]->IsEmpty()) &&
@@ -60,14 +60,14 @@ int Scheduler::SystemActivation()
 				}
 				else {
 					newRound();
+					ul.unlock();
 					continue;
 				}
 		//schedule a task from the chosen queue
 		currentTask = (*MLQ)[currentType]->ScheduleTask();
 		MLQ->decreaseCurrentSize();
 		ul.unlock();
-		condVar.notify_one();
-		//if(currentTask)
+		condVar->notify_all();
 		bool success = currentTask->Start();
 		Timer::IncreaseTime();
 		(*MLQ)[currentType]->IncreaseDoneTasks();
@@ -81,5 +81,6 @@ int Scheduler::SystemActivation()
 		if (Timer::GetTime() % TIME_TO_DETECT_SYSTEM == 0)
 			AvoidStarvation();
 	}
+	std::cout << "exit from loop" << std::endl;
 	return 0;
 }

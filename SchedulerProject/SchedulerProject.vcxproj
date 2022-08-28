@@ -147,11 +147,13 @@
     <ClCompile Include="Scheduler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Task.cpp" />
+    <ClCompile Include="TasksFuncs.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constDefinitions.h" />
     <ClInclude Include="Scheduler.h" />
+    <ClInclude Include="TasksFuncs.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="FCFSSchedule.h" />
     <ClInclude Include="Logger.h" />

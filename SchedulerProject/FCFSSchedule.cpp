@@ -66,7 +66,7 @@ LinkedList<Task>* FCFSSchedule::DetectSystem(int limit)
 	LinkedList<Task>* tasksToMoveToRT = new LinkedList<Task>();
 	LinkedList<Task>* innerQ = queue->getInnerList();
 	for (int detectedTasks = 0; detectedTasks < limit; detectedTasks++)
-	{ 
+	{
 		//get task close to timeOut
 		Node<Task>* starvingTask = smallestRemainingTimeTillTimeout(innerQ->getHead(), currentTime);
 		//no starvation detected- stop searching even though it didnt reach limit
@@ -76,5 +76,5 @@ LinkedList<Task>* FCFSSchedule::DetectSystem(int limit)
 		//delet the detected task from the Q- it passes now to deffrent DS
 		innerQ->deleteNode(starvingTask);
 	}
-	 return tasksToMoveToRT;
+	return tasksToMoveToRT;
 }

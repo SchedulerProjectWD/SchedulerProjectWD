@@ -10,6 +10,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scheduler.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="TasksFuncs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Timer.h" />
@@ -27,6 +28,7 @@
     <ClInclude Include="Scheduler.h" />
     <ClInclude Include="constDefinitions.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="TasksFuncs.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SchedulerProject.vcxproj.user" />

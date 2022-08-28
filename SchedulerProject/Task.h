@@ -1,6 +1,6 @@
 #pragma once
 
-enum class eType { real_time, low, high };
+enum class eType { real_time, high, low };
 
 class Task
 {

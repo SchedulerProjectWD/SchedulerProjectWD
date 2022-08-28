@@ -13,7 +13,7 @@ private:
 	void newRound();
 	void AvoidStarvation();
 public:
-	int SystemActivation();
+	int SystemActivation(std::condition_variable* condVar);
 	Scheduler();
 	~Scheduler();
 };

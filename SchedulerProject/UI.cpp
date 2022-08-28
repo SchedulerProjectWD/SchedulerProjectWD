@@ -8,12 +8,24 @@
 #include <mutex>
 #include <condition_variable>
 #include  <atomic>
+#include <functional>
+#include "TasksFuncs.h"
 using namespace std;
+
+int (*TasksFuncs::functionForTasks[8])(void*) = {
+						   TasksFuncs::open_application,
+						   TasksFuncs::send_messeg,
+						   TasksFuncs::backup_files,
+						   TasksFuncs::take_photo,
+						   TasksFuncs::download_file,
+						   TasksFuncs::low_task,
+						   TasksFuncs::high_task,
+						   TasksFuncs::realtime_task };
 
 std::ostream& operator<<(std::ostream& os, const PrintIntro p)
 {
 	system(p.color.c_str());
-	os << p.text<<endl;
+	os << p.text << endl;
 	return os;
 }
 
@@ -36,18 +48,25 @@ void UI::printMenu()
 Task* UI::getNewTaskFromUser()
 {
 	cout << GET_TASK_ID;
-	int time = Timer::GetTime();
-	Task* newTask = new Task(autoId++, (int)eType::high, nullptr, time, 0, 0, nullptr);
+	int id;
+	cin >> id;
+	id--;
+	eType newTaskType = (eType)(id % QUEUES_COUNT);
+
+	int newTaskArrivalTime = Timer::GetTime();
+	Task* newTask = new Task(autoId++, (int)newTaskType, TasksFuncs::functionForTasks[id], newTaskArrivalTime, 10, 0, nullptr);
 	return newTask;
 }
-
-bool UI::sendTaskToMLQ(Task* newTask)
+bool UI::sendTaskToMLQ(Task* newTask, std::condition_variable* condVarP)
 {
 	MultiLevelQueue& mlq = MultiLevelQueue::getMLQ(MAX_CAPACITY);
 	std::unique_lock<std::mutex> ul(mtx);
-	condVar.wait(ul, [&mlq,newTask]() {return !(mlq.IsFull( newTask->getType())); });
+	//ul.lock();
+	condVarP->wait(ul, std::bind([&mlq, newTask]() {return !(mlq.IsFull(newTask->getType())); }));
 	bool success = mlq.AddNewTask(newTask);
 	ul.unlock();
+	condVarP->notify_all();
+	//std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	return success;
 }
 
@@ -55,12 +74,12 @@ void say_goodbye() {
 	cout << SAY_GOODBYE;
 }
 
-void UI::operator()(void* params)
+void UI::operator()(std::condition_variable* condVar)
 {
-	is_active.store(true);
+	MultiLevelQueue::getMLQ().isActive = true;// = true;
 	printIntro();
 	printMenu();
-	int input;
+	int input = 1;
 	Task* task;
 	do
 	{
@@ -69,12 +88,14 @@ void UI::operator()(void* params)
 		{
 		case 1:
 			task = getNewTaskFromUser();
-			sendTaskToMLQ(task);
+			sendTaskToMLQ(task, condVar);
+			printMenu();
 			break;
 		default:
 			break;
 		}
 	} while (input);
-	is_active.store(false);
+	MultiLevelQueue::getMLQ().isActive = false;// = true;
+	condVar->notify_all();
 	say_goodbye();
 }

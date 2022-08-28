@@ -7,6 +7,7 @@
 MultiLevelQueue::MultiLevelQueue(int maxCapacity)
 	:maxCapacity(maxCapacity), currentSize(0)
 {
+	isActive = true;
 	queues = new ScheduleMethod * [QUEUES_COUNT];
 	queues[0] = new PrioritySchedule(maxCapacity / 2, maxCapacity, CLOSE_TO_STARVATION_RT);
 	queues[1] = new FCFSSchedule(maxCapacity / 4, CLOSE_TO_STARVATION_HIGH, eType::high);
@@ -14,7 +15,7 @@ MultiLevelQueue::MultiLevelQueue(int maxCapacity)
 }
 
 bool MultiLevelQueue::IsEmpty() {
-	return currentSize == 0;
+	return currentSize <= 0;
 }
 
 bool MultiLevelQueue::IsFull(eType type) {
@@ -35,8 +36,8 @@ int MultiLevelQueue::getCurrentSize()
 
 void MultiLevelQueue::decreaseCurrentSize() {
 	currentSize--;
-	if (currentSize == 0)
-		isThereWaitingTask.store(false);
+	//if (currentSize == 0)
+		//isThereWaitingTask.store(false);
 }
 
 bool MultiLevelQueue::AddNewTask(Task* newTask) {
@@ -52,8 +53,9 @@ bool MultiLevelQueue::AddNewTask(Task* newTask) {
 		}
 		if (result)
 			currentSize++;
-		isThereWaitingTask.store(true);
-			return result;
+		//isThereWaitingTask.store(true);
+
+		return result;
 	}
 	catch (const std::exception&)
 	{
@@ -79,8 +81,15 @@ ScheduleMethod* MultiLevelQueue::operator[](eType type) {
 }
 
 
-MultiLevelQueue& MultiLevelQueue::getMLQ(int maxCapacity = MAX_CAPACITY)
+MultiLevelQueue& MultiLevelQueue::getMLQ(int maxCapacity)
 {
 	static MultiLevelQueue MLQ(maxCapacity);
 	return MLQ;
 }
+
+void setIsActive(bool active)//TSL
+{
+	
+	return ;
+}
+
