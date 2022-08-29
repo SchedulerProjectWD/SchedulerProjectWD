@@ -147,7 +147,6 @@
     <ClCompile Include="Scheduler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Task.cpp" />
-    <ClCompile Include="TasksFuncs.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>

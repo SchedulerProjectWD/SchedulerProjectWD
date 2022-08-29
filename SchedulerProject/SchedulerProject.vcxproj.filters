@@ -10,7 +10,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scheduler.cpp" />
     <ClCompile Include="UI.cpp" />
-    <ClCompile Include="TasksFuncs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Timer.h" />

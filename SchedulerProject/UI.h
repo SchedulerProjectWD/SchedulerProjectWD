@@ -16,10 +16,10 @@ class UI
 {
 	void printIntro();
 	void printMenu();
-	Task* getNewTaskFromUser();
-	bool sendTaskToMLQ(Task* newTask, std::condition_variable* condVarP);
+	Task* getNewTaskFromUser(int id);
+	bool sendTaskToMLQ(Task* newTask, std::condition_variable* CVisThereWaitingTask);
 	static int autoId;
 public:
-	void operator()(std::condition_variable* condVar);
+	void operator()(std::condition_variable* CVisThereWaitingTask);
 };
 

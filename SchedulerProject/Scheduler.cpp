@@ -1,12 +1,11 @@
 #include "Scheduler.h"
 #include "PrioritySchedule.h"
 #include "Timer.h"
-#include "constDefinitions.h"
 #include <chrono>
 #include <functional>
 
 Scheduler::Scheduler() :currentTask(nullptr) {
-	MLQ = &(MultiLevelQueue::getMLQ(MAX_CAPACITY));
+	MLQ = &(MultiLevelQueue::getMLQ(MLQ_MAX_CAPACITY));
 	logger = new Logger("log.bin");
 }
 
@@ -32,13 +31,19 @@ void Scheduler::AvoidStarvation() {
 	}
 }
 
-int Scheduler::SystemActivation(std::condition_variable* condVar)
+void Scheduler::log(const char* message, LogType type)
 {
-	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+	LogRecord logMessage(message,type,
+		currentTask->getTaskId(), currentTask->getArriavlTime(), currentTask->getTimeOut());
+	*logger << logMessage;
+}
+
+int Scheduler::SystemActivation(std::condition_variable* CVisThereWaitingTask)
+{
 	while (MLQ->isActive || !MLQ->IsEmpty())
 	{
 		std::unique_lock<std::mutex> ul(mtx);
-		(*condVar).wait(ul, [this] {return !MLQ->IsEmpty() || !MLQ->isActive; });
+		(*CVisThereWaitingTask).wait(ul, [this] {return !MLQ->IsEmpty() || !MLQ->isActive; });
 		///choose a not empty queue with the highest weight 
 		eType currentType;
 		if (!((*MLQ)[eType::real_time]->IsEmpty()) &&
@@ -64,19 +69,20 @@ int Scheduler::SystemActivation(std::condition_variable* condVar)
 					continue;
 				}
 		//schedule a task from the chosen queue
+		LogRecord logSchduledType("scheduling a task");
 		currentTask = (*MLQ)[currentType]->ScheduleTask();
 		MLQ->decreaseCurrentSize();
 		ul.unlock();
-		condVar->notify_all();
+		CVisThereWaitingTask->notify_all();
 		bool success = currentTask->Start();
 		Timer::IncreaseTime();
 		(*MLQ)[currentType]->IncreaseDoneTasks();
-		LogRecord logMessage(INFO, "thw task got executed successfuly",
-			currentTask->getTaskId(), currentTask->getArriavlTime(), currentTask->getTimeOut());
-		*logger << logMessage;
-		//use logger: -> the message is according success value...
-		//if (success)
-			//logMessage.type = (int)(TASK | INFO);
+
+		if (success)
+			log("the task got executed successfuly");
+		else
+			log("failed to execute task", ERR);
+
 
 		if (Timer::GetTime() % TIME_TO_DETECT_SYSTEM == 0)
 			AvoidStarvation();

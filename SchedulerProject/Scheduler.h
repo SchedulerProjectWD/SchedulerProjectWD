@@ -12,8 +12,9 @@ private:
 	Logger* logger;
 	void newRound();
 	void AvoidStarvation();
+	void log(const char* message, LogType type = INFO);
 public:
-	int SystemActivation(std::condition_variable* condVar);
+	int SystemActivation(std::condition_variable* CVisThereWaitingTask);
 	Scheduler();
 	~Scheduler();
 };

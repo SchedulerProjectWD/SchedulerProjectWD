@@ -68,13 +68,12 @@ Logger& Logger::operator>>(LogRecord& record)
 
 LogRecord& Logger::operator[](int index)
 {
-	LogRecord record;
 	fileStream.open(path, ios::in | ios::binary);
 	if (!fileStream)
 		throw exception("could not open file");
 	fileStream.seekg(index * sizeof(LogRecord), ios::beg);
-	fileStream.read((char*)&record, sizeof(record));
-	return record;
+	fileStream.read((char*)&readRecord, sizeof(readRecord));
+	return readRecord;
 }
 
 //prefix

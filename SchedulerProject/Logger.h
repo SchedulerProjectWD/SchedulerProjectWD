@@ -8,6 +8,7 @@ class Logger
 	const char* path;
 	int positionRead;
 	int countWrite;
+	LogRecord readRecord;
 
 public:
 	Logger(const char* path);

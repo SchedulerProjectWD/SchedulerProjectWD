@@ -2,6 +2,7 @@
 #include "Task.h"
 #include "ScheduleMethod.h"
 #include "LinkedList.h"
+#include "constDefinitions.h"
 #include "MaxHeap.h"
 #include <iostream>
 
@@ -11,7 +12,7 @@ class PrioritySchedule : public ScheduleMethod
 {
 private:
 	MaxHeap<Task>* queue;
-	const int MaxPriority = 200;
+	//const int MAX_PRIORITY = 200;
 	bool InsertFromAnotherQueue(Task* task);
 public:
 	bool IsEmpty();
