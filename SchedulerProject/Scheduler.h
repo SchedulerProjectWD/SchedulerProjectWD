@@ -17,4 +17,5 @@ public:
 	int SystemActivation(std::condition_variable* CVisThereWaitingTask);
 	Scheduler();
 	~Scheduler();
+	Logger* getLogger() const;
 };

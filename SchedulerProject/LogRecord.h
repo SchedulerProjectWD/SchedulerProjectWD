@@ -8,12 +8,12 @@
 
 enum LogType
 {
-	INFO = 1,
-	WARNING = 2,
-	ERR = 4,
-	TASK = 8,
-	SCHEDULER = 16,
-	MLQ = 32
+	INFO ,
+	WARNING ,
+	ERR ,
+	TASK ,
+	SCHEDULER ,
+	MLQ 
 };
 
 struct LogRecord

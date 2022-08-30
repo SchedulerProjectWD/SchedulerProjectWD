@@ -4,6 +4,8 @@
 #include "PrioritySchedule.h"
 #include <exception>
 
+MultiLevelQueue MultiLevelQueue::MLQ(MLQ_MAX_CAPACITY);
+
 MultiLevelQueue::MultiLevelQueue(int maxCapacity)
 	:maxCapacity(maxCapacity), currentSize(0)
 {
@@ -81,9 +83,8 @@ ScheduleMethod* MultiLevelQueue::operator[](eType type) {
 }
 
 
-MultiLevelQueue& MultiLevelQueue::getMLQ(int maxCapacity)
+MultiLevelQueue& MultiLevelQueue::getMLQ()
 {
-	static MultiLevelQueue MLQ(maxCapacity);
 	return MLQ;
 }
 

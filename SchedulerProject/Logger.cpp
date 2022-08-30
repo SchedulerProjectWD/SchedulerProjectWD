@@ -61,7 +61,7 @@ Logger& Logger::operator>>(LogRecord& record)
 	if (!fileStream)
 		throw exception("could not open file");
 	fileStream.seekg(positionRead * sizeof(LogRecord), ios::beg);
-	fileStream.read((char*)&record, sizeof(record));
+	fileStream.read((char*)&record, sizeof(LogRecord));
 	fileStream.close();
 	return *this;
 }

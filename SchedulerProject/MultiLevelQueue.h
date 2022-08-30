@@ -16,6 +16,8 @@ private:
 	int maxCapacity;
 	MultiLevelQueue(int maxCapacity);
 	MultiLevelQueue() = delete;
+	static MultiLevelQueue MLQ;
+
 
 public:
 	std::atomic_bool isActive;
@@ -28,5 +30,5 @@ public:
 	bool AddNewTask(Task* newTask);
 	ScheduleMethod* operator[](int index);
 	ScheduleMethod* operator[](eType type);
-	static MultiLevelQueue& getMLQ(int maxCapacity=MLQ_MAX_CAPACITY);
+	static MultiLevelQueue& getMLQ();
 };

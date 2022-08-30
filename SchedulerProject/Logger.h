@@ -6,11 +6,11 @@ class Logger
 {
 	std::fstream fileStream;
 	const char* path;
-	int positionRead;
 	int countWrite;
 	LogRecord readRecord;
 
 public:
+	int positionRead;
 	Logger(const char* path);
 	~Logger();
 	//returns how many messages have written to th logger

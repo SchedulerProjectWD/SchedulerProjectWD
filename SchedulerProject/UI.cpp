@@ -56,7 +56,7 @@ Task* UI::getNewTaskFromUser(int id)
 }
 bool UI::sendTaskToMLQ(Task* newTask, std::condition_variable* CVisThereWaitingTask)
 {
-	MultiLevelQueue& mlq = MultiLevelQueue::getMLQ(MLQ_MAX_CAPACITY);
+	MultiLevelQueue& mlq = MultiLevelQueue::getMLQ();
 	std::unique_lock<std::mutex> ul(mtx);
 	CVisThereWaitingTask->wait(ul, std::bind([&mlq, newTask]() {return !(mlq.IsFull(newTask->getType())); }));
 	bool success = mlq.AddNewTask(newTask);

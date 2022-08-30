@@ -5,13 +5,18 @@
 #include <functional>
 
 Scheduler::Scheduler() :currentTask(nullptr) {
-	MLQ = &(MultiLevelQueue::getMLQ(MLQ_MAX_CAPACITY));
-	logger = new Logger("log.bin");
+	MLQ = &(MultiLevelQueue::getMLQ());
+	logger = new Logger(R"(C:\Users\שניידר\Documents\תכנות\תשפב\Bootcamp\ProjectWD\30\log.bin)");
 }
 
 Scheduler::~Scheduler()
 {
 	delete logger;
+}
+
+Logger* Scheduler::getLogger() const
+{
+	return this->logger;
 }
 
 void Scheduler::newRound() {
@@ -33,7 +38,7 @@ void Scheduler::AvoidStarvation() {
 
 void Scheduler::log(const char* message, LogType type)
 {
-	LogRecord logMessage(message,type,
+	LogRecord logMessage(message, type,
 		currentTask->getTaskId(), currentTask->getArriavlTime(), currentTask->getTimeOut());
 	*logger << logMessage;
 }
@@ -69,7 +74,7 @@ int Scheduler::SystemActivation(std::condition_variable* CVisThereWaitingTask)
 					continue;
 				}
 		//schedule a task from the chosen queue
-		LogRecord logSchduledType("scheduling a task");
+		//LogRecord logSchduledType("scheduling a task");
 		currentTask = (*MLQ)[currentType]->ScheduleTask();
 		MLQ->decreaseCurrentSize();
 		ul.unlock();
@@ -79,7 +84,7 @@ int Scheduler::SystemActivation(std::condition_variable* CVisThereWaitingTask)
 		(*MLQ)[currentType]->IncreaseDoneTasks();
 
 		if (success)
-			log("the task got executed successfuly");
+			log("the task got executed successfuly", TASK);
 		else
 			log("failed to execute task", ERR);
 
