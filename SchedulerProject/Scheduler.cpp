@@ -6,7 +6,7 @@
 
 Scheduler::Scheduler() :currentTask(nullptr) {
 	MLQ = &(MultiLevelQueue::getMLQ());
-	logger = new Logger(R"(C:\Users\שניידר\Documents\תכנות\תשפב\Bootcamp\ProjectWD\30\log.bin)");
+	logger = new Logger(R"(..\log.bin)");
 }
 
 Scheduler::~Scheduler()
