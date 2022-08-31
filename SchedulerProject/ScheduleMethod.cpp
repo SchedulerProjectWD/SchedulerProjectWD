@@ -1,3 +1,4 @@
+#pragma once
 #include "ScheduleMethod.h" 
 
 ScheduleMethod::ScheduleMethod(int limitTasksToExec, int closeToStarvation, eType type) :

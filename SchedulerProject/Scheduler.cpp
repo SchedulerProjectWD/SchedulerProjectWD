@@ -1,3 +1,4 @@
+#pragma once
 #include "Scheduler.h"
 #include "PrioritySchedule.h"
 #include "Timer.h"
@@ -92,6 +93,5 @@ int Scheduler::SystemActivation(std::condition_variable* CVisThereWaitingTask)
 		if (Timer::GetTime() % TIME_TO_DETECT_SYSTEM == 0)
 			AvoidStarvation();
 	}
-	std::cout << "exit from loop" << std::endl;
 	return 0;
 }

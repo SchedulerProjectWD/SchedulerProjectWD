@@ -36,6 +36,8 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FCFSTest.cpp" />
+    <ClCompile Include="RTTest.cpp" />
     <ClCompile Include="LoggerTest.cpp" />
     <ClCompile Include="MaxHeapTest.cpp" />
     <ClCompile Include="TaskTest.cpp" />

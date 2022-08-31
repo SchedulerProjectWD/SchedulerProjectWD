@@ -42,16 +42,21 @@ void UI::printIntro()
 void UI::printMenu()
 {
 	cout << GET_TASK_ID;
-	cout <<"enter 0 to exit." << endl;
+	cout << "enter 0 to exit." << endl;
 }
 
 Task* UI::getNewTaskFromUser(int id)
 {
 	id--;
 	eType newTaskType = (eType)(id % QUEUES_COUNT);
-
+	int priority = DEFAULT_VALUE;
+	if (newTaskType == eType::real_time)
+	{
+		std::cout << "Enter the priority of the task between 0 to " << MAX_TASK_PRIORITY << std::endl;
+		std::cin >> priority;
+	}
 	int newTaskArrivalTime = Timer::GetTime();
-	Task* newTask = new Task(autoId++, (int)newTaskType, TasksFuncs::functionForTasks[id], newTaskArrivalTime, 10, 0, nullptr);
+	Task* newTask = new Task(autoId++, (int)newTaskType, TasksFuncs::functionForTasks[id], newTaskArrivalTime, 10, priority, nullptr);
 	return newTask;
 }
 bool UI::sendTaskToMLQ(Task* newTask, std::condition_variable* CVisThereWaitingTask)

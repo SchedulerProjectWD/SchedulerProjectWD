@@ -73,6 +73,7 @@ LogRecord& Logger::operator[](int index)
 		throw exception("could not open file");
 	fileStream.seekg(index * sizeof(LogRecord), ios::beg);
 	fileStream.read((char*)&readRecord, sizeof(readRecord));
+	fileStream.close();
 	return readRecord;
 }
 

@@ -21,7 +21,7 @@ int main()
 	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 	Scheduler scheduler;
 	scheduler.SystemActivation(&CVisThereWaitingTask);
-
+	LogRecord r = (*scheduler.getLogger())[0];
 	userInterface.join();
 }
 

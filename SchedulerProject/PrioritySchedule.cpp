@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include "PrioritySchedule.h"
 #include "Timer.h"
@@ -7,6 +8,7 @@ PrioritySchedule::PrioritySchedule(int limitTasksToExec, int limitSize, int clos
 	: ScheduleMethod(limitTasksToExec, closeToStarvation, eType::real_time) {
 	queue = new MaxHeap<Task>(limitSize);
 }
+
 PrioritySchedule::~PrioritySchedule() {
 	delete queue;
 }

@@ -1,3 +1,4 @@
+#pragma once
 #include "FCFSSchedule.h"
 #include "Node.h"
 #include "Timer.h"

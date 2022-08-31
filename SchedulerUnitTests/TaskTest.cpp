@@ -7,8 +7,6 @@ int demoFunc(void*) {
 
 class TaskTest : public ::testing::Test {
 protected:
-	//Task(int taskId, int type, int (*func)(void*), int arriavlTime,
-	//	int timeOut, int priority, void* args);
 	Task* RTtask1 = new Task(1, 1, demoFunc, 1, 3, 50, nullptr);
 	Task* RTtask2 = new Task(2, 1, demoFunc, 2, 4, 50, nullptr);
 	~TaskTest() {
