@@ -16,25 +16,37 @@ class TasksFuncs
 									8--> real-time task.*/
 public:
 	static int open_application(void* arg) {
-		std::cout << "======>open aplication sleep" << std::endl;
+		Logger taskLogger("tasks.bin", "tasks_excecution.txt");
+
+		LogRecord recordStart("======>open aplication started");
+		taskLogger << recordStart;
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-		std::cout << "======>open aplication awake" << std::endl;
+		LogRecord recordEnd("======>open aplication finished");
+		taskLogger << recordEnd;
 		return 1;
 	}
 	static int send_messeg(void* arg) {
-		std::cout << "======>send_messeg sleep" << std::endl;
-		std::this_thread::sleep_for(std::chrono::milliseconds(300));
-		std::cout << "======>send_messeg awake" << std::endl;
+		Logger taskLogger("tasks.bin", "tasks_excecution.txt");
+
+		LogRecord recordStart("======>send messeg started");
+		taskLogger << recordStart;
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+		LogRecord recordEnd("======>send messeg finished");
+		taskLogger << recordEnd;
 		return 1;
 	}
 	static int backup_files(void* arg) {
-		std::cout << "======>backup_files sleep" << std::endl;
-		std::this_thread::sleep_for(std::chrono::milliseconds(300));
-		std::cout << "======>backup_files awake" << std::endl;
+		Logger taskLogger("tasks.bin", "tasks_excecution.txt");
+
+		LogRecord recordStart("======>backup_files started");
+		taskLogger << recordStart;
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+		LogRecord recordEnd("======>backup_files finished");
+		taskLogger << recordEnd;
 		return 1;
 	}
 	static int take_photo(void* arg) {
-		Logger taskLogger("tasks.bin");
+		Logger taskLogger("tasks.bin", "tasks_excecution.txt");
 
 		LogRecord recordStart("======>take photo started");
 		taskLogger << recordStart;
@@ -44,31 +56,46 @@ public:
 		return 1;
 	}
 	static int download_file(void* arg) {
-		std::cout << "======>download file sleep" << std::endl;
+		Logger taskLogger("tasks.bin", "tasks_excecution.txt");
+
+		LogRecord recordStart("======>download file started");
+		taskLogger << recordStart;
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-		std::cout << "======>download file awake" << std::endl;		return 1;
+		LogRecord recordEnd("======>download file finished");
+		taskLogger << recordEnd;
+		return 1;
 	}
 	static int low_task(void* arg) {
-		std::cout << "======>low sleep" << std::endl;
+		Logger taskLogger("tasks.bin", "tasks_excecution.txt");
+
+		LogRecord recordStart("======>low task started");
+		taskLogger << recordStart;
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-		std::cout << "======>low awake" << std::endl;
+		LogRecord recordEnd("======>low task finished");
+		taskLogger << recordEnd;
 		return 1;
 	}
 	static int high_task(void* arg) {
-		std::cout << "======>high sleep" << std::endl;
+		Logger taskLogger("tasks.bin", "tasks_excecution.txt");
+
+		LogRecord recordStart("======>high task started");
+		taskLogger << recordStart;
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-		std::cout << "======>high awake" << std::endl;
+		LogRecord recordEnd("======>high task finished");
+		taskLogger << recordEnd;
 		return 1;
 	}
 	static int realtime_task(void* arg) {
-		std::cout << "======>rt sleep" << std::endl;
+		Logger taskLogger("tasks.bin", "tasks_excecution.txt");
+
+		LogRecord recordStart("======>real time task started");
+		taskLogger << recordStart;
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-		std::cout << "======>rt awake" << std::endl;
+		LogRecord recordEnd("======>real time task finished");
+		taskLogger << recordEnd;
 		return 1;
 	}
 	static int (*functionForTasks[8])(void*);
-
-
 };
 
 

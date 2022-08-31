@@ -7,13 +7,14 @@
 #define _CRT_SECURE_NO_WARNINGS
 using namespace std;
 
-Logger::Logger(const char* path) :positionRead(0), countWrite(0), path(path) {}
+Logger::Logger(const char* path, const char* historyFilePath) 
+	:positionRead(0), countWrite(0), path(path), pathHistoryFile(historyFilePath) {}
 
 Logger::~Logger()
 {
 	LogRecord record;
 	string strRecord;
-	ofstream logFile("history_log.txt", ios::in | ios::out | ios::app);
+	ofstream logFile(pathHistoryFile, ios::in | ios::out | ios::app);
 	if (!logFile)
 		throw exception("could not open file");
 
@@ -28,7 +29,13 @@ Logger::~Logger()
 		*this >> record;
 		++(*this);
 		strRecord = "time: " + to_string(record.time) +
-			"; message: " + record.message + ";\n";
+			"; message: " + record.message + ";";
+		if (record.type == TASK)
+		{
+			strRecord += " taskId: " + to_string(record.taskId) + "; arrivalTime: " + to_string(record.arrivalTime)
+				+ "; timeOut: " + to_string(record.timeOut) + ";";
+		}
+		strRecord += "\n";
 		logFile << strRecord;
 	}
 	remove("log.bin");

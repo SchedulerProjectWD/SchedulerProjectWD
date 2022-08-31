@@ -27,7 +27,7 @@ struct LogRecord
 	char message[LOG_MESSAGE_SIZE];
 
 	LogRecord()
-		:type(INFO), taskId(0), message(""), time(0)
+		:type(INFO), taskId(DEFAULT_VALUE), message(""), time(0)
 	{ }
 
 	LogRecord(
