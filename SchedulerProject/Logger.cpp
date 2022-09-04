@@ -56,7 +56,7 @@ Logger& Logger::operator<<(const LogRecord& record)
 	fileStream.open(path, ios::out | ios::app | ios::binary);
 	if (!fileStream) {
 		//to create the file in the first time:
-		fileStream.open(R"(C:\Users\שניידר\Documents\תכנות\תשפב\Bootcamp\ProjectWD\31-08\logs\log.bin)", ios::out | ios::binary);
+		fileStream.open(path, ios::out | ios::binary);
 		if (!fileStream)
 			throw exception("could not open file");
 	}
@@ -75,7 +75,7 @@ Logger& Logger::operator>>(LogRecord& record)
 
 	std::unique_lock<std::mutex> ul(mtx);
 	CVisFileOpen.wait(ul, [&] {return !fileStream.is_open(); });
-	fileStream.open(R"(C:\Users\שניידר\Documents\תכנות\תשפב\Bootcamp\ProjectWD\31-08\logs\log.bin)", ios::in | ios::binary);
+	fileStream.open(path, ios::in | ios::binary);
 	if (!fileStream)
 		throw exception("could not open file");
 	fileStream.seekg(positionRead * sizeof(LogRecord), ios::beg);
@@ -91,7 +91,7 @@ LogRecord& Logger::operator[](int index)
 	//while (fileStream.is_open());
 	std::unique_lock<std::mutex> ul(mtx);
 	CVisFileOpen.wait(ul, [&] {return !fileStream.is_open(); });
-	fileStream.open(R"(C:\Users\שניידר\Documents\תכנות\תשפב\Bootcamp\ProjectWD\31-08\logs\log.bin)", ios::in | ios::binary);
+	fileStream.open(path, ios::in | ios::binary);
 	if (!fileStream)
 		throw exception("could not open file");
 	fileStream.seekg(index * sizeof(LogRecord), ios::beg);

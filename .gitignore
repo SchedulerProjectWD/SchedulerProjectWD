@@ -7,7 +7,6 @@ log.bin
 test.bin
 tasks.bin
 log.txt
-history_log.txt
 task_excecution.txt
 # User-specific files
 *.rsuser
