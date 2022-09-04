@@ -2,6 +2,7 @@
 #include <fstream>
 #include "LogRecord.h"
 
+
 class Logger
 {
 	std::fstream fileStream;
@@ -9,10 +10,12 @@ class Logger
 	const char* pathHistoryFile;
 	int countWrite;
 	LogRecord readRecord;
+	std::mutex mtx;
+	std::condition_variable CVisFileOpen;
 
 public:
 	int positionRead;
-	Logger(const char* path, const char* historyFilePath = "history_log.txt");
+	Logger(const char* path= R"(..\logs\log.bin)", const char* historyFilePath = R"(..\logs\history_log.txt)");
 	~Logger();
 	//returns how many messages have written to th logger
 	int GetLength();

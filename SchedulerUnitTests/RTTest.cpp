@@ -9,6 +9,7 @@
 #include <condition_variable>
 
 int UI::autoId = 0;
+
 #pragma region Insert
 
 const int NUM_TASKS = 6;
@@ -53,11 +54,11 @@ TEST_F(InsertRTTest, Read)
 	scheduler.SystemActivation(&CVisThereWaitingTask);
 	Logger* schedulerLogger = scheduler.getLogger();
 	int length = schedulerLogger->GetLength();
-	for (int i = 0; i < length; i++)
+	for (int i = 0, j =0 ; i < length; i++)
 	{
 		record = (*schedulerLogger)[i];
 		if (record.type == TASK)
-			result[i] = record.taskId;
+			result[j++] = record.taskId;
 	}
 	for (int i = 0; i < NUM_TASKS; i++)
 	{
@@ -137,7 +138,7 @@ TEST_F(StarvationRTUnitTest, detactStarvationInRT) {
 		}
 		ui.sendTaskToMLQ(taskWithLowPriorit, &CVisThereWaitingTask);
 		MultiLevelQueue::getMLQ().isActive = false;
-	});
+		});
 
 	Scheduler scheduler;
 	scheduler.SystemActivation(&CVisThereWaitingTask);
@@ -151,5 +152,54 @@ TEST_F(StarvationRTUnitTest, detactStarvationInRT) {
 			isThereTaskWithLongWaitingTime = true;
 	}
 	EXPECT_EQ(isThereTaskWithLongWaitingTime, false);
+}
+#pragma endregion
+
+#pragma region Priority Inversion
+
+class PriorityInversionTest :public testing::Test
+{
+protected:
+	Task* highTask = new Task(1, 1, demoFuncRTInsert, 1, 10, 0, nullptr);
+	UI ui;
+};
+
+TEST_F(PriorityInversionTest, rt)
+{
+	int rtTaskId = 20, insertTime;
+	std::thread insertLowTasksThread(
+		[&] {
+			for (int i = 0; i < MLQ_MAX_CAPACITY - RESERVED_SPACE_TO_RT_TASKS; i++)
+			{
+				ui.sendTaskToMLQ(highTask, &CVisThereWaitingTask);
+			}
+			MultiLevelQueue::getMLQ().isActive = false;
+		});
+	std::thread insertRTTasksThread(
+		[&] {
+			std::this_thread::sleep_for(std::chrono::milliseconds(300));
+			insertTime = Timer::GetTime();
+			Task * rtTask = new Task(rtTaskId, 0, demoFuncRTInsert, insertTime, 10, 20, nullptr);
+			ui.sendTaskToMLQ(rtTask, &CVisThereWaitingTask);
+		});
+	Scheduler scheduler;
+	insertRTTasksThread.join();
+	scheduler.SystemActivation(&CVisThereWaitingTask);
+	insertLowTasksThread.join();
+	LogRecord rtExecution, rtInsert;
+	Logger* logger = MultiLevelQueue::getMLQ().getLogger();
+	for (int i = 0; i < logger->GetLength(); i++)
+	{
+		LogRecord temp = (*logger)[i];
+		if (temp.taskId == rtTaskId)
+		{
+			if (temp.type == MLQ)
+				rtInsert = temp;
+			if (temp.type == TASK)
+				rtExecution = temp;
+		}
+	}
+	EXPECT_EQ(rtInsert.time, insertTime);
+	EXPECT_TRUE(rtExecution.time == 0);
 }
 #pragma endregion

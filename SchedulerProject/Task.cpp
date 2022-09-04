@@ -40,7 +40,7 @@ bool Task::operator>(const int otherPriotity) const
 
 bool Task::operator<(const int otherPriotity) const
 {
-    return priority < otherPriotity;;
+    return priority < otherPriotity;
 }
 
 void Task::operator=(int priority)

@@ -1,7 +1,7 @@
 #pragma once
 #include <atomic>
-//#include <mutex>  
 #include "ScheduleMethod.h"
+#include "Logger.h"
 #include "constDefinitions.h"
 
 static std::mutex mtx;
@@ -17,12 +17,14 @@ private:
 	MultiLevelQueue(int maxCapacity);
 	MultiLevelQueue() = delete;
 	static MultiLevelQueue MLQ;
-
+	Logger* logger;
 
 public:
+	~MultiLevelQueue(){	delete logger;	}
 	std::atomic_bool isActive;
 	int getCurrentSize();
 	int getMaxCapacity();
+	Logger* getLogger();
 	bool IsEmpty();
 	bool IsFull(eType type);
 	int getQueuesCount();

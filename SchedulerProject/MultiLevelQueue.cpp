@@ -14,6 +14,7 @@ MultiLevelQueue::MultiLevelQueue(int maxCapacity)
 	queues[0] = new PrioritySchedule(maxCapacity / 2, maxCapacity, CLOSE_TO_STARVATION_RT);
 	queues[1] = new FCFSSchedule(maxCapacity / 4, CLOSE_TO_STARVATION_HIGH, eType::high);
 	queues[2] = new FCFSSchedule(maxCapacity / 5, CLOSE_TO_STARVATION_LOW, eType::low);
+	logger = new Logger(R"(..\logs\log.bin)");
 }
 
 bool MultiLevelQueue::IsEmpty() {
@@ -31,6 +32,11 @@ int MultiLevelQueue::getMaxCapacity() {
 	return maxCapacity;
 }
 
+Logger* MultiLevelQueue::getLogger()
+{
+	return logger;
+}
+
 int MultiLevelQueue::getCurrentSize()
 {
 	return currentSize;
@@ -38,8 +44,6 @@ int MultiLevelQueue::getCurrentSize()
 
 void MultiLevelQueue::decreaseCurrentSize() {
 	currentSize--;
-	//if (currentSize == 0)
-		//isThereWaitingTask.store(false);
 }
 
 bool MultiLevelQueue::AddNewTask(Task* newTask) {
@@ -55,8 +59,9 @@ bool MultiLevelQueue::AddNewTask(Task* newTask) {
 		}
 		if (result)
 			currentSize++;
-		//isThereWaitingTask.store(true);
-
+		LogRecord record("insert new task to the MLQ", LogType::MLQ, newTask->getTaskId()
+			, newTask->getArriavlTime(), newTask->getTimeOut());
+		(*logger) << record;
 		return result;
 	}
 	catch (const std::exception&)
@@ -86,11 +91,5 @@ ScheduleMethod* MultiLevelQueue::operator[](eType type) {
 MultiLevelQueue& MultiLevelQueue::getMLQ()
 {
 	return MLQ;
-}
-
-void setIsActive(bool active)//TSL
-{
-	
-	return ;
 }
 

@@ -7,12 +7,7 @@
 
 Scheduler::Scheduler() :currentTask(nullptr) {
 	MLQ = &(MultiLevelQueue::getMLQ());
-	logger = new Logger(R"(..\log.bin)");
-}
-
-Scheduler::~Scheduler()
-{
-	delete logger;
+	logger = MLQ->getLogger();
 }
 
 Logger* Scheduler::getLogger() const

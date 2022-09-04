@@ -19,7 +19,7 @@ public:
 
 template<class T>
 LinkedList<T>::LinkedList() {
-	 first = last = nullptr;
+	first = last = nullptr;
 }
 template<class T>
 bool LinkedList<T>::addToBack(T* data) {
@@ -56,11 +56,9 @@ template<class T>
 T* LinkedList<T>::popFront() {
 	if (first->data) {
 		T* data = first->data;
-		if (first->next) {
-			Node<T>* toDel = first;
-			first = first->next;
-			delete toDel;
-		}
+		Node<T>* toDel = first;
+		first = first->next;
+		delete toDel;
 		return data;
 	}
 	return nullptr;
